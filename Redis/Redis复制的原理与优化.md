@@ -6,7 +6,7 @@
 
 - 2、主从复制的作用
   -  Redis持久化保证了即使redis服务重启也不会丢失数据，因为redis服务重启后会将硬盘上持久化的数据恢复到内存中，但是当redis服务器的硬盘损坏了可能会导致数据丢失，如果通过redis的主从复制机制就可以避免这种单点故障，如下图：
-    ![](http://ovsiiuil2.bkt.clouddn.com/fd36c6cfc40adf5907b9d5016c3354b3d8c0e2c1.png)
+    ![](https://www.icheesedu.com/images/qiniu/fd36c6cfc40adf5907b9d5016c3354b3d8c0e2c1.png)
     
    -  说明
        -  主redis中的数据有两个副本（replication）即从redis1和从redis2，即使一台redis服务器宕机其它两台redis服务也可以继续提供服务。
@@ -19,11 +19,11 @@
      
      - 在6380 服务器上执行 slaveof 127.0.0.1 6379
      
-      ![](http://ovsiiuil2.bkt.clouddn.com/ffddf97389495a8bd761d7ea0e7d817b_934x366.png)
+      ![](https://www.icheesedu.com/images/qiniu/ffddf97389495a8bd761d7ea0e7d817b_934x366.png)
 
      - 取消复制，不想成为任何服务器的从 -- 在6380 服务器上执行 slaveof no one
 
-      ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_09-44-54.png)
+      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_09-44-54.png)
 
  - 2、配置实现
 
@@ -98,7 +98,7 @@
   ```
 打开log日志查看在主从复制的过程中都发生了什么操作
  
- ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_10-22-18.png)
+ ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_10-22-18.png)
 
   
 - 4、runid和复制偏移量
@@ -151,7 +151,7 @@
          - 从节点加载RDB的时间
          - 可能的AOF重写时间
 
-     ![](http://ovsiiuil2.bkt.clouddn.com/faba5668620f687f257cdc069f066e57_849x480.png) 
+     ![](https://www.icheesedu.com/images/qiniu/faba5668620f687f257cdc069f066e57_849x480.png) 
      
      
     - 2、部分复制
@@ -162,7 +162,7 @@
       - 当slave在此连接master时 ，传递命令 psync {offset} {runid} ,告诉 master 自己当前的偏移量是多少
       - master 向 slave 返回CONTINUE 把 缺失的内容 传递过去。
 
-      ![](http://ovsiiuil2.bkt.clouddn.com/afcde1f61a86395226fb6159fcb5bdda_725x462.png)
+      ![](https://www.icheesedu.com/images/qiniu/afcde1f61a86395226fb6159fcb5bdda_725x462.png)
       
 - 6、故障处理
   - 故障是不可避免的。
@@ -170,13 +170,13 @@
   
    - 从服务宕机
    
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_10-56-59.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_10-56-59.png)
   
       修改配置，启动另一台为从服务。
    
     - 主服务宕机
     
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_10-58-31.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_10-58-31.png)
      
      选择一个从服务，让你作为主服务，并且能够进行读写。
      
@@ -184,19 +184,19 @@
 - 7、开发与运维中的问题
 
     - 1、读写分离
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_11-05-33.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_11-05-33.png)
 
     - 2、主从配置不一致
 
-      ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_11-07-54.png)
+      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_11-07-54.png)
       
     - 3、规避全量复制
      
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_11-10-17.png)
+       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_11-10-17.png)
        
     - 4、规避复制风暴
     
-      ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_11-13-01.png)
+      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_11-13-01.png)
 
 
 

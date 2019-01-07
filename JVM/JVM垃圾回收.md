@@ -29,7 +29,7 @@
     - verbose:gc
     - -xx:+PrintGCDetail
  
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-204_14-27-08.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-204_14-27-08.png)
    
      最后面两句将object1和object2赋值为null，也就是说object1和object2指向的对象已经不可能再被访问，但是由于它们互相引用对方，导致它们的引用计数器都不为0，那么垃圾收集器就永远不会回收它们。
   

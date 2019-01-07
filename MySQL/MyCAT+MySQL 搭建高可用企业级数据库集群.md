@@ -12,37 +12,37 @@
 ##2、MyCAT数据库中间层的主要作用
 - 1、作为分布式数据库中间层使用
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-17-44.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-17-44.png)
   
 - 2、实现后端数据库的读写分离及负载均衡
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-21-41.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-21-41.png)
   
 - 3、对业务数据库进行垂直切分
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-24-16.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-24-16.png)
   
 - 4、对业务数据库进行水平切分
   
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-26-16.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-26-16.png)
    
 - 5、控制数据库连接的数量
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-30-55.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-30-55.png)
   
 
 ##3、MyCat的基本元素
 - 逻辑库
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-33-33.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-33-33.png)
 
 - 逻辑表
    
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-35-10.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-35-10.png)
 
 - 逻辑表的类别
  
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_17-36-41.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_17-36-41.png)
 
   
 
@@ -71,7 +71,7 @@ mycat start
 ##5、MyCat进阶
  
  - 1、详解MyCat主要配置文件的标签和属性
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_19-25-46.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_19-25-46.png)
    
    为了快速跑起一个Mycat demo，我们先在本地数据库里面建立test1和test2数据库，创建一个名为opt的表，字段为id（int）及name（varchar）
 
@@ -239,9 +239,9 @@ mycat start
    
 ```
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_20-07-04.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_20-07-04.png)
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-05-143_20-07-19.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-143_20-07-19.png)
         
   - 2、schema.xml 数据库配置
          - 这里主要配置数据库信息，一个schema就是一个逻辑库，可以理解为Mycat管理的一个数据库DB（实际上不存在，是一个虚拟的概念）name属性和server.xml里面对应。 

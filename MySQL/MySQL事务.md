@@ -1,7 +1,7 @@
 ##MySQL事务
 - mysql阻塞原因思考
 
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_11-11-36.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_11-11-36.png)
     
      - 主键
      -  隔离级别
@@ -26,7 +26,7 @@
   - 持久性（Durability)
       - 持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。
 - 事务编程
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_11-09-55.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_11-09-55.png)
     
 - 并发会存在的问题
    -  **dirty read 脏读**
@@ -44,8 +44,8 @@
        - 幻读的重点在于新增或者删除，同样的条件，第 1 次和第 2 次读出来的记录数不一样
 
 - 事务的隔离级别
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_12-46-49.png)
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_12-58-16.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_12-46-49.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_12-58-16.png)
    
    - **Read uncommitted**
        - 读未提交，顾名思义，就是一个事务可以读取另一个未提交事务的数据。
@@ -86,7 +86,7 @@
        - Serializable 是最高的事务隔离级别，在该级别下，事务串行化顺序执行，可以避免脏读、不可重复读与幻读。但是这种事务隔离级别效率低下，比较耗数据库性能，一般不使用。
 
 - **事务编程的不好习惯**
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_12-59-35.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_12-59-35.png)
     
 - **锁的概念**
    - 锁用于在多个事务访问同一个对象时根据这些操作访问同一个对象的先后次序给事务排序。
@@ -99,17 +99,17 @@
       
       - 在InnoDB存储引擎中的latch，可以通过命令SHOW ENGINE INNODB MUTEX 来进行查看
        
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_13-54-51.png)
+       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_13-54-51.png)
 
        ![](https://images2015.cnblogs.com/blog/754297/201601/754297-20160131230428146-1539680077.jpg)
        
 -  **InnoDB锁分析**
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_14-00-59.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_14-00-59.png)
 
 -  **锁的兼容性**
    
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_14-11-26.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_14-11-26.png)
    
     - 如果一个事务请求的锁模式与当前的锁兼容，InnoDB就请求的锁授予该事务；反之，如果两者两者不兼容，该事务就要等待锁释放。
     - 意向锁是InnoDB自动加的，不需用户干预。对于UPDATE、DELETE和INSERT语句，InnoDB会自动给涉及及数据集加排他锁（Ｘ）；对于普通SELECT语句，InnoDB会自动给涉及数据集加排他锁（Ｘ）；对于普通SELECT语句，InnoDB不会任何锁；事务可以通过以下语句显示给记录集加共享锁或排锁。
@@ -131,11 +131,11 @@
       -  3、当表有多个索引的时候，不同的事务可以使用不同的索引锁定不同的行，另外，不论是使用主键索引、唯一索引或普通索引，InnoDB都会使用行锁来对数据加锁。
       - 4、即便在条件中使用了索引字段，但是否使用索引来检索数据是由MySQL通过判断不同执行计划的代价来决定的，如果MySQL认为全表扫描效率更高，比如对一些很小的表，它就不会使用索引，这种情况下InnoDB将使用表锁，而不是行锁。因此，在分析锁冲突时，别忘了检查SQL的执行计划，以确认是否真正使用了索引。
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_14-15-54.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_14-15-54.png)
   
   - 只有重复读才有 GAP Lock 间隔锁  。
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_14-30-23.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_14-30-23.png)
   
   - **间隙锁（Next-Key锁）**
 
@@ -148,15 +148,15 @@
   
 - **RR隔离级别gap lock和Next-Key Locks测试**：   
   - 1.**非唯一索引，范围搜索时加锁  最终都要追踪到主键上的**
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_16-34-39.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_16-34-39.png)
   - 2.**非唯一索引，唯一匹配搜索时候加锁  最终都要追踪到主键上的**
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_17-11-01.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_17-11-01.png)
   - 3.**唯一索引，范围搜索时候加锁**
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_17-43-49.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_17-43-49.png)
   
 - **一些查看数据库中事务和锁情况的常用语句**
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-176_17-47-30.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_17-47-30.png)
   
 - 死锁
    - 在InnoDB中，除单个SQL组成的事务外，锁是逐步获得的，当两个事务都需要获得对方持有的排他锁才能继续完成事务，这种循环锁等待就是典型的死锁。

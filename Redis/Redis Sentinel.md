@@ -9,14 +9,14 @@
 
 -  虽然 Redis Sentinel 释出为一个单独的可执行文件 redis-sentinel ， 但实际上它只是一个运行在特殊模式下的 Redis 服务器， 你可以在启动一个普通 Redis 服务器时通过给定 –sentinel 选项来启动 Redis Sentinel 。
 
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_13-38-55.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_13-38-55.png)
   
 ##2、Redis Sentinel故障转移
      
-![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_13-41-21.png)
+![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_13-41-21.png)
        
 ##3、实践
 
- ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-184_13-58-23.png)
+ ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_13-58-23.png)
       
 

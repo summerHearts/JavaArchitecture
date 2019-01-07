@@ -3,11 +3,11 @@
 
 - 发布者和订阅者都是Redis客户端，Channel则为Redis服务器端，发布者将消息发送到某个的频道，订阅了这个频道的订阅者就能接收到这条消息，客户端可以订阅任意数量的频道
 
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_14-33-04.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-33-04.png)
 
   - 使用方式
     
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_14-38-18.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-38-18.png)
 
      ```
        //publish channel message：发布者向指定的频道发布消息

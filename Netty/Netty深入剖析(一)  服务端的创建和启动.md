@@ -29,7 +29,7 @@
        
        -  4、 取eventLoop设置到channel中，并调用AbstractChannel$AbstractUnsafe的register0方法奖channel注册到eventLoop中的selector，并将ChannelPromise状态设置为成功：
 
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-168_11-42-34.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-168_11-42-34.png)
     
     ```
      ChannelFuture f = b.bind(8888).sync();
@@ -61,7 +61,7 @@
 
     ```
     
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-168_11-32-35.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-168_11-32-35.png)
     
     ```
     this(newSocket(DEFAULT_SELECTOR_PROVIDER));
@@ -92,7 +92,7 @@
     }
     ```
     
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-168_11-43-52.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-168_11-43-52.png)
     
     ```
      final Map<ChannelOption<?>, Object> options = options0();
@@ -172,7 +172,7 @@
         }
        ```
    
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-06-168_11-59-54.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-168_11-59-54.png)
    
    绑定端口
    

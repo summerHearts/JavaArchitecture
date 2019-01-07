@@ -10,11 +10,11 @@
 
   - RDB持久化是指在指定的时间间隔内将内存中的数据集快照写入磁盘，实际操作过程是fork一个子进程，先将数据集写入临时文件，写入成功后，再替换之前的文件，用二进制压缩存储。
 
-    ![](http://ovsiiuil2.bkt.clouddn.com/388326-20170726161552843-904424952.png)
+    ![](https://www.icheesedu.com/images/qiniu/388326-20170726161552843-904424952.png)
     
  - AOF持久化以日志的形式记录服务器所处理的每一个写、删除操作，查询操作不会记录，以文本的方式记录，可以打开文件看到详细的操作记录。
 
-    ![](http://ovsiiuil2.bkt.clouddn.com/388326-20170726161604968-371688235.png)
+    ![](https://www.icheesedu.com/images/qiniu/388326-20170726161604968-371688235.png)
 
 
 ## 2、RDB
@@ -23,16 +23,16 @@
    - 触发机制
       - 主要有三种触发机制
          
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_15-54-00.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_15-54-00.png)
    
       - 1、save 
-        ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_15-55-10.png)
+        ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_15-55-10.png)
 
       - 2、bgsave
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_16-14-56.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_16-14-56.png)
          
       - 3、两者之间的区别
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_16-15-50.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_16-15-50.png)
       
       - 4、不容忽略的方式
 
@@ -166,13 +166,13 @@ cp: overwrite `dump.rdb'? y
 ##3、AOF 
 - RDB 现存的问题
    - 1、耗时，耗性能。
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_17-11-16.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-11-16.png)
    - 2、不可控，容易丢失数据。
-   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_17-11-38.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-11-38.png)
    
 - AOF ：Redis 默认不开启。它的出现是为了弥补RDB的不足（数据的不一致性），所以它采用日志的形式来记录每个写操作，并追加到文件中。Redis 重启的会根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。
 
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_17-13-28.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-13-28.png)
     
 - 1:AOF持久化的三种策略
   - 1、Always
@@ -209,13 +209,13 @@ cp: overwrite `dump.rdb'? y
       ```
     解说：当AOF文件大小是上次rewrite后大小的一倍且文件大于64M时触发。一般都设置为3G，64M太小了。
  
-      ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_17-26-53.png)
+      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-26-53.png)
     
-      ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_17-27-37.png)
+      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-27-37.png)
     
 - 3、重写流程
  
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-183_17-27-53.png)
+       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-27-53.png)
 -  4、从配置文件了解AOF
 
    - 打开 redis.conf 文件，找到 APPEND ONLY MODE 对应内容

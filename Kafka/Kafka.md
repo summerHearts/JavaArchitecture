@@ -11,7 +11,7 @@
 - 5、**kafka对硬件的配置有什么要求？**
 - 6、**kafka的消息保证有几种方式？**
 
-![](http://ovsiiuil2.bkt.clouddn.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2.png)
+![](https://www.icheesedu.com/images/qiniu/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2.png)
 
 
 ##1、简介
@@ -41,9 +41,9 @@
 　　
 ##4、架构
 
-![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_11-13-31.png)
+![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_11-13-31.png)
 
-![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_11-13-45.png)
+![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_11-13-45.png)
 
 ##5、Kafka专用术语：
  
@@ -70,31 +70,31 @@
 
    - segment file组成：由2大部分组成，分别为index file和data file，此2个文件一一对应，成对出现，后缀".index"和“.log”分别表示为segment索引文件、数据文件。
  
-     ![](http://ovsiiuil2.bkt.clouddn.com/932932-20170818102025709-1227763455.jpg.png)
+     ![](https://www.icheesedu.com/images/qiniu/932932-20170818102025709-1227763455.jpg.png)
      
      　segment文件命名规则：partion全局的第一个segment从0开始，后续每个segment文件名为上一个segment文件最后一条消息的offset值。数值最大为64位long大小，19位数字字符长度，没有数字用0填充。
      　
      　segment中index与data file对应关系物理结构如下：
      　
-     　![](http://ovsiiuil2.bkt.clouddn.com/932932-20170818102555537-956883187.jpg.png)
+     　![](https://www.icheesedu.com/images/qiniu/932932-20170818102555537-956883187.jpg.png)
  
     索引文件存储大量元数据，数据文件存储大量消息，索引文件中元数据指向对应数据文件中message的物理偏移地址。
 
 　　 其中以索引文件中元数据3,497为例，依次在数据文件中表示第3个message（在全局partiton表示第368772个message），以及该消息的物理偏移地址为497。
 　　 
-　　 ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_15-34-57.png)
+　　 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_15-34-57.png)
 　　 
 ##6、kafka高吞吐量的因素
 
-![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_14-32-56.png)
+![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_14-32-56.png)
 
  - 1、 顺序写的方式存储数据 
   - 2、批量发送；在异步发送模式中。kafka允许进行批量发送，也就是先讲消息缓存到内存中，然后一次请求批量发送出去。这样减少了磁盘频繁io以及网络IO造成的性能瓶颈      - batch.size 每批次发送的数据大小      - linger.ms  间隔时间
        - 3、零拷贝    - 消息从发送到落地保存，broker维护的消息日志本身就是文件目录，每个文件都是二进制保存，生产者和消费者使用相同的格式来处理。在消费者获取消息时，服务器先从硬盘读取数据到内存，然后把内存中的数据原封不动的通过socket发送给消费者。传统操作经历了很多步骤       - 操作系统将数据从磁盘读入到内核空间的页缓存       - 应用程序将数据从内核空间读入到用户空间缓存中       - 应用程序将数据写回到内核空间到socket缓存中       -  操作系统将数据从socket缓冲区复制到网卡缓冲区，以便将数据经网络发出  通过“零拷贝”技术可以去掉这些没必要的数据复制操作，同时也会减少上下文切换次数
 
-   ![1](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_14-40-19.png)
+   ![1](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_14-40-19.png)
    
-   ![2](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_14-44-02.png)
+   ![2](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_14-44-02.png)
    
    避免了内核态与用户态的上下文切换动作
    
@@ -113,7 +113,7 @@
       
 ##10、副本机制
 
-![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_14-59-50.png)
+![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_14-59-50.png)
 
 - **ISR（副本同步队列）**
      维护的是有资格的follower节点  - 1、 副本的所有节点都必须要和zookeeper保持连接状态  - 2、副本的最后一条消息的offset和leader副本的最后一条消息的offset之间的差值不能超过指定的阀值，这个阀值是可以设置的（replica.lag.max.messages）
@@ -121,7 +121,7 @@
 
 - **HW&LEO**  - 关于follower副本同步的过程中，还有两个关键的概念，HW(HighWatermark)和LEO(Log End Offset). 这两个参数跟ISR集合紧密关联。HW标记了一个特殊的offset，当消费者处理消息的时候，只能拉去到HW之前的消息，HW之后的消息对消费者来说是不可见的。也就是说，取partition对应ISR中最小的LEO作为HW，consumer最多只能消费到HW所在的位置。每个replica都有HW，leader和follower各自维护更新自己的HW的状态。对于leader新写入的消息，consumer不能立刻消费，leader会等待该消息被所有ISR中的replicas同步更新HW，此时消息才能被consumer消费。这样就保证了如果leader副本损坏，该消息仍然可以从新选举的leader中获取。  - LEO 是所有副本都会有的一个offset标记，它指向追加到当前副本的最后一个消息的offset。当生产者向leader副本追加消息的时候，leader副本的LEO标记就会递增；当follower副本成功从leader副本拉去消息并更新到本地的时候，follower副本的LEO就会增加
 
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-190_15-03-14.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_15-03-14.png)
 
 
 

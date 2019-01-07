@@ -3,7 +3,7 @@
   - 执行引擎，执行引擎的任务是负责执行 class 文件中包含的字节码指令，相当于实际机器上的 CPU
   - 内存区，将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块，如实际机器上的各种功能的寄存器或者 PC 指针的记录器等
   - 本地方法调用，调用 C 或 C++ 实现的本地方法的代码返回结果
-![](http://ovsiiuil2.bkt.clouddn.com/11.jpeg)
+![](https://www.icheesedu.com/images/qiniu/11.jpeg)
 
 - 1、**Native Method Stack本地方法栈**
 
@@ -66,7 +66,7 @@
 
 ##2、对象在内存中的布局-对象的创建
 
-![](http://ovsiiuil2.bkt.clouddn.com/1111.png)
+![](https://www.icheesedu.com/images/qiniu/1111.png)
 
 
 - 1.**检测类是否被加载：**
@@ -102,17 +102,17 @@
    - 对齐填充：不是必然的存在，就是为了对齐的嘛
 
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/285763-20170807175816862-1918148270.png)
+  ![](https://www.icheesedu.com/images/qiniu/285763-20170807175816862-1918148270.png)
 
 ##4、对象是如何定位访问
 - 对象的访问定位有两种：句柄定位和直接指针
   - 句柄定位：Java 堆会画出一块内存来作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息
  
-      ![](http://ovsiiuil2.bkt.clouddn.com/232323.jpeg)
+      ![](https://www.icheesedu.com/images/qiniu/232323.jpeg)
   
   - 直接指针访问：java堆对象的不居中就必须考虑如何放置访问类型数据的相关信息，而reference中存储的直接就是对象地址
 
-     ![](http://ovsiiuil2.bkt.clouddn.com/640-4.jpeg)
+     ![](https://www.icheesedu.com/images/qiniu/640-4.jpeg)
    
   比较：使用直接指针就是速度快，使用句柄reference指向稳定的句柄，对象被移动改变的也只是句柄中实例数据的指针，而reference本身并不需要修改。
 

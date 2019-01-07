@@ -3,13 +3,13 @@
 - 环境搭建
   - 1、http://maven.apache.org/download.cgi 
 
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_20-47-09.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_20-47-09.png)
 
   - 2、解压即可 
 
   - 3、配置环境变量
   
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_20-57-51.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_20-57-51.png)
      
      具体命令如下
      
@@ -51,18 +51,18 @@
 
 - 建议在设置里的Plugins中下载一个插件主题  **Material Theme UI**
  
- ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_21-29-57.png)
+ ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_21-29-57.png)
  
  效果如下
  
- ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_21-30-13.png)
+ ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_21-30-13.png)
 
 
 ##3、Nexus搭建Maven私服
 - 在开发过程中，有时候会使用到公司内部的一些开发包，显然把这些包放在外部是不合适的。另外，由于项目一直在开发中，这些内部的依赖可能也在不断的更新。可以通过搭建公司内部的Maven服务器，将第三方和内部的依赖统一管理，同时也可以节省网络带宽，当然前提是项目所需要的构件在私服中已经存在
 
   
-  ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_21-35-32.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_21-35-32.png)
 
 - 那么怎么在本地搭建私服呢
    
@@ -98,7 +98,7 @@
      
       修改端口或者密码，在etc下的nexus-default.properties
       
-      ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_22-32-04.png)
+      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_22-32-04.png)
 
   -  4.简单介绍一下Repository
      - Repository的type属性有：proxy，hosted，group三种。
@@ -109,11 +109,11 @@
        
    简单的说，就是你可以上传私有的项目到hosted，以及配置proxy以获取第三方的依赖（比如可以配置中央仓库的地址）。前面两个都弄好了之后，在通过group聚合给客户提供统一的访问地址
    
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_22-35-59.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_22-35-59.png)
      
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_22-36-44.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_22-36-44.png)
      
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_22-40-58.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_22-40-58.png)
      
      如果想要上传到hostd仓库，必须把类型改为allow redeploy,不然传不上来。
 
@@ -135,20 +135,20 @@
 
    - 2、配置pom文件
        
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_23-50-44.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_23-50-44.png)
      
          
    - 3、配置deploy
 
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_23-48-42.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_23-48-42.png)
          
    - 4、打包上传私服
    
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_23-49-13.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_23-49-13.png)
          
    - 5、在 nexus中查看是否上传成功
       
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-06_23-44-50.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_23-44-50.png)
  
    
 
