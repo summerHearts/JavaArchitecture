@@ -10,15 +10,15 @@
 - api 和 app 是构建微服务项目的最简单组成部分，如果使用 maven 的多 module 组织代码，则体现为如下的形式。
 - serviceA 服务
   serviceA/pom.xml 定义父 pom 文件
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-12-55.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-12-55.png)
     
     serviceA/serviceA-api/pom.xml 定义对外暴露的接口，最终会被打成 jar 包供外部服务依赖
 
-    ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-12-18.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-12-18.png)
  
  serviceA/serviceA-app/pom.xml 定义了服务的实现，一般是 springboot 应用，所以下面的配置文件中，我配置了 springboot 应用打包的插件，最终会被打成 jar 包，作为独立的进程运行。
 
-     ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-14-59.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-14-59.png)
 
 
  麻雀虽小，五脏俱全，这样一个微服务模块就实现了。
@@ -50,17 +50,17 @@
 
   - **使用 Specification 模式解决查询接口过多的问题**
 
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-20-09.png)
+       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-20-09.png)
  
        如上的多个查询方法目的都是同一个：根据条件查询出 Student，只不过查询条件有所差异。试想一下，Student 对象假设有 10 个属性，最坏的情况下它们的排列组合都可能作为查询条件，这便是查询接口过多的根源。
 
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-19-28.png)
+       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-19-28.png)
      
       上述接口便是最通用的单参接口，三个方法几乎囊括了 99% 的查询条件。所有的查询条件都被封装在了 StudentSpec,StudentListSpec,StudentPageSpec 之中，分别满足了单对象查询，批量查询，分页查询的需求。如果你了解领域驱动设计，会发现这里借鉴了其中 Specification 模式的思想。
 
    - 单参数易于做统一管理
 
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-19-00.png)
+       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-19-00.png)
        
      入参中的入参虽然形态各异，但由于是单个入参，所以可以统一继承 AbstractBaseRequest，即上述的 ARequest，BRequest，CRequest 都是 AbstractBaseRequest 的子类。在千米内部项目中，AbstractBaseRequest 定义了 traceId、clientIp、clientType、operationType 等公共入参，减少了重复命名，我们一致认为，这更加的 OO。
 
@@ -95,13 +95,13 @@
 
       - 初始方案
 
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-25-15.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-25-15.png)
          
         我们假设模块 A 存在上述的 ModuleAProvider 接口，ModuleAProvider 的实现中或多或少都会出现异常，例如可能存在的异常 ModuleAException，调用者实际上并不知道 ModuleAException 的存在，只有当出现异常时，才会知晓。对于 ModuleAException 这种业务异常，我们更希望调用方能够显示的处理，所以 ModuleAException 应该被设计成 Checked Excepition。
     
       - 正确的异常设计姿势
 
-          ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-26-22.png)
+          ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-26-22.png)
 
       上述接口中定义的异常实际上也是一种契约，契约的好处便是不需要叙述，调用方自然会想到要去处理 Checked Exception，否则连编译都过不了
 
@@ -109,7 +109,7 @@
 
         在 ModuleB 中，应当如下处理异常：
          
-         ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-27-22.png)
+         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-27-22.png)
          
          someOp 演示了一个异常流的传递，ModuleB 暴露出去的异常应当是 ModuleB 的 api 模块中异常类，虽然其依赖了 ModuleA ，但需要将异常进行转换，或者对于那些意料之中的业务异常可以像 anotherOp() 一样进行处理，不再传递。这时如果新增 ModuleC 依赖 ModuleB，那么 ModuleC 完全不需要关心 ModuleA 的异常。
 
@@ -118,7 +118,7 @@
 
        作为系统设计者，我们应该认识到一点： RPC 调用，失败是常态。通常我们需要对 RPC 接口做熔断处理，比如千米内部便集成了 Netflix 提供的熔断组件 Hystrix。Hystrix 需要知道什么样的异常需要进行熔断，什么样的异常不能够进行熔断。在没有上述的异常设计之前，回答这个问题可能还有些难度，但有了 Checked Exception 的契约，一切都变得明了清晰了。
        
-        ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-208_09-28-29.png)
+        ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-28-29.png)
 
        如服务不可用等原因引发的多次接口调用超时异常，会触发 Hystrix 的熔断；而对于业务异常，我们则认为不需要进行熔断，因为对于接口 throws 出的业务异常，我们也认为是正常响应的一部分，只不过借助于 JAVA 的异常机制来表达。实际上，和生成自动化测试类的工具一样，我们使用了另一套自动化的工具，可以由 Dubbo 接口自动生成对应的 Hystrix Proxy。我们坚定的认为开发体验和用户体验一样重要，所以公司内部会有非常多的自动化工具。
 
