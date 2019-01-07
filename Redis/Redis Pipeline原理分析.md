@@ -6,7 +6,7 @@
      
    -   为了提升效率，这时候Pipeline出现了，它允许客户端可以一次发送多条命令，而不等待上一条命令执行的结果，这和网络的Nagel算法有点像（TCP_NODELAY选项）。不仅减少了RTT，同时也减少了IO调用次数（IO调用涉及到用户态到内核态之间的切换）。
    
-      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-19-19.png)
+     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-19-19.png)
      
        - 客户端这边首先将执行的命令写入到缓冲中，最后再一次性发送Redis。但是有一种情况就是，缓冲区的大小是有限制的，比如Jedis，限制为8192，超过了，则刷缓存，发送到Redis，但是不去处理Redis的应答，如上图所示那样。
 
@@ -18,9 +18,10 @@
        - Redis的Pipeline和Transaction不同，Transaction会存储客户端的命令，最后一次性执行，而Pipeline则是处理一条，响应一条，但是这里却有一点，就是客户端会并不会调用read去读取socket里面的缓冲数据，这也就造就了，如果Redis应答的数据填满了该接收缓冲（SO_RECVBUF），那么客户端会通过ACK，WIN=0（接收窗口）来控制服务端不能再发送数据，那样子，数据就会缓冲在Redis的客户端应答列表里面。所以需要注意控制Pipeline的大小
 
 - **拥有Pipeline与传统的区别**
-     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-23-25.png)
+    
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-23-25.png)
 
-     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-22-27.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_14-22-27.png)
 
 -  **在什么样的情景下适合使用pipeline**
 
