@@ -4,3 +4,5 @@
 更多信息，关注java架构
 
 ![WechatIMG136.jpeg](https://upload-images.jianshu.io/upload_images/325120-52aaabb3179e50ec.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+简书地址： [简书文集](https://www.jianshu.com/u/4f07086fa936)
