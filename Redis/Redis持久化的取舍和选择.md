@@ -97,47 +97,47 @@
 
     ```
     [root@ikenvin bin]# vim redis.conf
-save 900 1
-save 120 5
-save 60 10000
-[root@ikenvin bin]# ./redis-server redis.conf
-[root@ikenvin bin]# ./redis-cli -h 127.0.0.1 -p 6379
-127.0.0.1:6379> keys *
-(empty list or set)
-127.0.0.1:6379> set key1 value1
-OK
-127.0.0.1:6379> set key2 value2
-OK
-127.0.0.1:6379> set key3 value3
-OK
-127.0.0.1:6379> set key4 value4
-OK
-127.0.0.1:6379> set key5 value5
-OK
-127.0.0.1:6379> set key6 value6
-OK
-127.0.0.1:6379> SHUTDOWN
-not connected> QUIT
-[root@ikenvin bin]# cp dump.rdb dump_bk.rdb
-[root@ikenvin bin]# ./redis-server redis.conf
-[root@ikenvin bin]# ./redis-cli -h 127.0.0.1 -p 6379
-127.0.0.1:6379> FLUSHALL 
-OK
-127.0.0.1:6379> keys *
-(empty list or set)
-127.0.0.1:6379> SHUTDOWN
-not connected> QUIT
-[root@ikenvin bin]# cp dump_bk.rdb  dump.rdb
-cp: overwrite `dump.rdb'? y
-[root@ikenvin bin]# ./redis-server redis.conf
-[root@ikenvin bin]# ./redis-cli -h 127.0.0.1 -p 6379
-127.0.0.1:6379> keys *
-1) "key5"
-2) "key1"
-3) "key3"
-4) "key4"
-5) "key6"
-6) "key2"
+    save 900 1
+    save 120 5
+    save 60 10000
+    [root@ikenvin bin]# ./redis-server redis.conf
+    [root@ikenvin bin]# ./redis-cli -h 127.0.0.1 -p 6379
+    127.0.0.1:6379> keys *
+    (empty list or set)
+    127.0.0.1:6379> set key1 value1
+    OK
+    127.0.0.1:6379> set key2 value2
+    OK
+    127.0.0.1:6379> set key3 value3
+    OK
+    127.0.0.1:6379> set key4 value4
+    OK
+    127.0.0.1:6379> set key5 value5
+    OK
+    127.0.0.1:6379> set key6 value6
+    OK
+    127.0.0.1:6379> SHUTDOWN
+    not connected> QUIT
+    [root@ikenvin bin]# cp dump.rdb dump_bk.rdb
+    [root@ikenvin bin]# ./redis-server redis.conf
+    [root@ikenvin bin]# ./redis-cli -h 127.0.0.1 -p 6379
+    127.0.0.1:6379> FLUSHALL 
+    OK
+    127.0.0.1:6379> keys *
+    (empty list or set)
+    127.0.0.1:6379> SHUTDOWN
+    not connected> QUIT
+    [root@ikenvin bin]# cp dump_bk.rdb  dump.rdb
+    cp: overwrite `dump.rdb'? y
+    [root@ikenvin bin]# ./redis-server redis.conf
+    [root@ikenvin bin]# ./redis-cli -h 127.0.0.1 -p 6379
+    127.0.0.1:6379> keys *
+    1) "key5"
+    2) "key1"
+    3) "key3"
+    4) "key4"
+    5) "key6"
+    6) "key2"
     ```
 第一步：vim 修改持久化配置时间，120秒内修改5次则持久化一次。
 第二步：重启服务使配置生效。
