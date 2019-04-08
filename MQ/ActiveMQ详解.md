@@ -1,4 +1,4 @@
-##1、消息中间件之JMS规范
+## 1、消息中间件之JMS规范
 
 **什么是Java消息服务**
 
@@ -77,7 +77,7 @@
 
 
 
-##2、JMS编码接口之间的关系
+## 2、JMS编码接口之间的关系
 
 ![](https://markdownimge.oss-cn-beijing.aliyuncs.com/markdown/JMS%E7%BC%96%E7%A0%81%E6%8E%A5%E5%8F%A3%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.jpeg)
 
@@ -132,7 +132,7 @@ Session session=connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE
 - 事务回滚意味着生产的所有消息被销毁，消费的所有消息被恢复，也就是下次仍然能够接收到发送端的消息，除非消息已经过期了。
 
 
-##3、ActiveMQ的应用场景
+## 3、ActiveMQ的应用场景
 
 - 异步消息
 
@@ -147,7 +147,7 @@ Session session=connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE
 
 ![](https://upload-images.jianshu.io/upload_images/325120-28b0e44e27832409.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600)
 
-##3.1、安装
+## 3.1、安装
 
  - 1、下载：apache-activemq-5.14.0-bin.tar.gz
 
@@ -175,7 +175,7 @@ Session session=connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE
     ./activemq stop
     ```
 
-##3.2、代码实践
+## 3.2、代码实践
 
 
 **点对点模型通信**
@@ -388,7 +388,7 @@ public class JmsTopicPersistenteReceiver {
 
 点对点通信和发布订阅通信模式的区别就是创建生产者和消费者对象时提供的Destination对象不同，如果是点对点通信创建的Destination对象是Queue，发布订阅通信模式通信则是Topic。
 
-##3.3、整合Spring使用
+## 3.3、整合Spring使用
 
 ```
 <dependency>
@@ -549,7 +549,7 @@ public void testQueueConsumer() throws Exception {
 }
 ```
 
-##4、消息的发送策略
+## 4、消息的发送策略
 
 **持久化消息**
 
@@ -577,7 +577,7 @@ public void testQueueConsumer() throws Exception {
  connectionFactory.setAlwaysSyncSend();
  ```
 
-##5、consumer获取消息是pull还是（broker的主动 push）
+## 5、consumer获取消息是pull还是（broker的主动 push）
 
 - 默认情况下，mq服务器（broker）采用异步方式向客户端主动推送消息(push)。也就是说broker在向某个消费者会话推送消息后，不会等待消费者响应消息，直到消费者处理完消息以后，主动向broker返回处理结果
  
@@ -598,7 +598,7 @@ public void testQueueConsumer() throws Exception {
 假如prefetchSize=0 . 此时对于consumer来说，就是一个pull模式
 
 
-##6、acknowledge为什么能够在第5次主动执行ack以后，把前面的消息都确认掉
+## 6、acknowledge为什么能够在第5次主动执行ack以后，把前面的消息都确认掉
 
 ![](https://upload-images.jianshu.io/upload_images/325120-ad14a135ccec68db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
@@ -723,7 +723,7 @@ private void afterMessageIsConsumed(MessageDispatch md, boolean messageExpired) 
 }
 ```
 
-##7、消息确认
+## 7、消息确认
 
 - ACK_TYPE，消费端和broker交换ack指令的时候，还需要告知broker  ACK_TYPE。 
 - ACK_TYPE表示确认指令的类型，broker可以根据不同的ACK_TYPE去针对当前消息做不同的应对策略
@@ -733,11 +733,11 @@ private void afterMessageIsConsumed(MessageDispatch md, boolean messageExpired) 
   - STANDARD_ACK_TYPE  表示消息处理成功
 
 
-##8、ActiveMQ支持的传输协议
+## 8、ActiveMQ支持的传输协议
 
 - client端和broker端的通讯协议： TCP、UDP 、NIO、SSL、Http（s）、vm
 
-##9、ActiveMQ持久化存储
+## 9、ActiveMQ持久化存储
 
 ![](https://upload-images.jianshu.io/upload_images/325120-a433345dd7f002aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
@@ -857,7 +857,7 @@ JDBC Store和JDBC Message Store with ActiveMQ Journal的区别：
 ```
 
 
-##10、静态网络连接
+## 10、静态网络连接
 
 ![](https://upload-images.jianshu.io/upload_images/325120-2592af606fe7c849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
@@ -902,7 +902,7 @@ JDBC Store和JDBC Message Store with ActiveMQ Journal的区别：
 - duplex ：默认false，设置是否能双向通信
 
 
-##11、**“丢失”的消息**
+## 11、**“丢失”的消息**
 
  - broker1和broker2通过networkConnector连接，一些consumers连接到broker2，消费broker1上的消息。消息先被broker2从broker1上消费掉，然后转发给这些consumers。不幸的是转发部分消息的时候broker2重启了，这些consumers发现broker2连接失败，通过failover连接到broker1上去了，但是有一部分他们还没有消费的消息被broker1已经分发到了broker2上去了。这些消息，就好像是消失了。
 

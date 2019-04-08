@@ -1,4 +1,4 @@
-##播放器架构
+## 播放器架构
 
 ![](https://upload-images.jianshu.io/upload_images/325120-2ab1f4fa5d39a89d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
@@ -8,7 +8,7 @@
 
 ![](https://upload-images.jianshu.io/upload_images/325120-c01d033430967991.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
-##1、FFmpeg常用命令实战
+## 1、FFmpeg常用命令实战
 
 FFmpeg音视频处理流程讲解
 

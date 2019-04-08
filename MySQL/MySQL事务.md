@@ -1,4 +1,4 @@
-##MySQL事务
+## MySQL事务
 - mysql阻塞原因思考
 
     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-06-176_11-11-36.png)

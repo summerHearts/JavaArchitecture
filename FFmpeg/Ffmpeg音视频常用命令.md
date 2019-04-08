@@ -1,10 +1,10 @@
-##背景
+## 背景
 
 大家都对抖音短视频很了解，那么怎么对视频进行裁剪，合成，转化呢，在开始不妨先来了解一下 FFmpeg这个工具。
 
 点击这里，了解FFmpeg [Ffmpeg音视频常用命令](https://www.jianshu.com/p/e09be79ad566)
 
-## 1、视频转换
+##  1、视频转换
 
 比如一个avi文件，想转为mp4，或者一个mp4想转为ts。 
 
@@ -13,7 +13,7 @@ ffmpeg -i input.avi output.mp4
 ffmpeg -i input.mp4 output.ts
 ```
 
-## 2、 提取音频 
+##  2、 提取音频 
 
 ```
 ffmpeg -i test.mp4 -acodec copy -vn output.aac 
@@ -24,12 +24,12 @@ ffmpeg -i test.mp4 -acodec aac -vn output.aac
 ```
 ffmpeg -i test.mp4 -acodec aac -vn output.aac
 ```
-## 3、 提取视频
+##  3、 提取视频
 
 ```
 ffmpeg -i input.mp4 -vcodec copy -an output.mp4
 ```
-## 4、 视频剪切
+##  4、 视频剪切
 
 下面的命令，可以从时间为00:00:15开始，截取5秒钟的视频。 
 
@@ -38,7 +38,7 @@ ffmpeg -ss 00:00:15 -t 00:00:05 -i input.mp4 -vcodec copy -acodec copy output.mp
 ```
 -ss表示开始切割的时间，-t表示要切多少。上面就是从15秒开始，切5秒钟出来。
 
-## 5、 码率控制
+##  5、 码率控制
 
 码率控制对于在线视频比较重要。因为在线视频需要考虑其能提供的带宽。
 
@@ -83,7 +83,7 @@ ffmpeg -i input.mp4 -b:v 2000k -bufsize 2000k output.mp4
 ffmpeg -i input.mp4 -b:v 2000k -bufsize 2000k -maxrate 2500k output.mp4
 ```
 
-## 6、 视频编码格式转换
+##  6、 视频编码格式转换
 
 比如一个视频的编码是MPEG4，想用H264编码，咋办？ 
 
@@ -103,22 +103,22 @@ ffmpeg -i input.mp4 -c:v libx265 output.mp4 
 ffmpeg -i input.mp4 -c:v libx264 output.mp4
 ```
 
-## 7、 只提取视频ES数据
+##  7、 只提取视频ES数据
 
 ```
 ffmpeg –i input.mp4 –vcodec copy –an –f m4v output.h264
 ```
 
-## 8、 过滤器的使用
+##  8、 过滤器的使用
 
-### 8.1 将输入的1920x1080缩小到960x540输出:
+## # 8.1 将输入的1920x1080缩小到960x540输出:
 
 ```
 ffmpeg -i input.mp4 -vf scale=960:540 output.mp4
 ```
 ps: 如果540不写，写成-1，即scale=960:-1, 那也是可以的，ffmpeg会通知缩放滤镜在输出时保持原始的宽高比。
 
-### 8.2 为视频添加logo
+## # 8.2 为视频添加logo
 
 比如，我有这么一个图片  
 
@@ -150,7 +150,7 @@ ps: 如果540不写，写成-1，即scale=960:-1, 那也是可以的，ffmpeg会
 ```
 ./ffmpeg -i input.mp4 -i logo.png -filter_complex overlay=W-w:H-h output.mp4
 ```
-### 8.3 去掉视频的logo
+## # 8.3 去掉视频的logo
 
 语法：-vf delogo=x:y:w:h[:t[:show]]  
 x:y 离左上角的坐标  
@@ -165,7 +165,7 @@ ffmpeg -i input.mp4 -vf delogo=0:0:220:90:100:1 output.mp4
 
 ![](https://markdownimge.oss-cn-beijing.aliyuncs.com/markdown/ffmpeg-delete-logo.png)
 
-## 9、 截取视频图像 
+##  9、 截取视频图像 
 
 
 ```
@@ -186,7 +186,7 @@ ffmpeg -i input.mp4 -ss 00:00:20 -t 10 -r 1 -q:v 2 -f image2 pic-%03d.jpeg
 -t  表示共要多少时间。 
 如此，ffmpeg会从input.mp4的第20s时间开始，往下10s，即20~30s这10秒钟之间，每隔1s就抓一帧，总共会抓10帧。
 
-## 10、 序列帧与视频的相互转换
+##  10、 序列帧与视频的相互转换
 
 把darkdoor.[001-100].jpg序列帧和001.mp3音频文件利用mpeg4编码方式合成视频文件darkdoor.avi：
 
@@ -200,9 +200,9 @@ $ ffmpeg -i 001.mp3 -i darkdoor.%3d.jpg -s 1024x768 -author fy -vcodec mpeg4 dar
 $ ffmpeg -i bc-cinematic-en.avi example.%d.jpg
 ```
 
-## 其他用法
+##  其他用法
 
-### 1.输出YUV420原始数据
+## # 1.输出YUV420原始数据
 
 对于一下做底层编解码的人来说，有时候常要提取视频的YUV原始数据，如下：
 
@@ -230,9 +230,9 @@ ffmpeg -i pic-001.jpeg -s 1440x1440 -pix_fmt yuv420p xxx3.yuv
 
 当然了，YUV还有yuv422p啥的，你在-pix_fmt 换成yuv422p就行啦！
 
-## 2、 H264编码profile & level控制
+##  2、 H264编码profile & level控制
 
-### 背景知识
+## # 背景知识
 
 先科普一下profile&level。（这里讨论最常用的H264） 
 
@@ -257,7 +257,7 @@ H.264 Baseline profile、Extended profile和Main profile都是针对8位样本�
 
 ![](https://markdownimge.oss-cn-beijing.aliyuncs.com/markdown/ffmpeg-h264-level.png)
 
-### 2.1 ffmpeg如何控制profile&level
+## # 2.1 ffmpeg如何控制profile&level
 
 举3个例子吧 
 
@@ -283,7 +283,7 @@ ffmpeg -i input.mp4 -c:v libx264 -x264-params "profile=high:level=3.0" output.mp
 苹果的设备对不同profile的支持。 
 ![](https://markdownimge.oss-cn-beijing.aliyuncs.com/markdown/ffmpeg-h264--apple-suport-profile.png)
 
-### 2.2、 编码效率和视频质量的取舍(preset, crf)
+## # 2.2、 编码效率和视频质量的取舍(preset, crf)
 
 除了上面提到的，强行配置biterate，或者强行配置profile/level，还有2个参数可以控制编码效率。 
 一个是preset，一个是crf。 
@@ -303,9 +303,9 @@ ffmpeg -i input -c:v libx264 -profile:v main -preset:v fast -level 3.1 -x264opts
 ```
 (参考自：[https://trac.ffmpeg.org/wiki/Encode/H.264](https://trac.ffmpeg.org/wiki/Encode/H.264))
 
-#### 2.3、 H265 (HEVC)编码tile&level控制
+## ##  2.3、 H265 (HEVC)编码tile&level控制
 
-#### 背景知识
+## ##  背景知识
 
 和H264的profile&level一样，为了应对不同应用的需求，HEVC制定了“层级”(tier) 和“等级”(level)。 
 tier只有main和high。 

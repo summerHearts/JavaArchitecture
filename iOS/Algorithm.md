@@ -1,4 +1,4 @@
-##1、字符逆序算法
+## 1、字符逆序算法
 
 ```
 @interface CharReverse : NSObject
@@ -25,7 +25,7 @@ void char_reverse(char* cha){
 @end
 ```
 
-##2、 链表反转算法
+## 2、 链表反转算法
 
 ```
 // 定义一个链表
@@ -110,7 +110,7 @@ void printList(struct Node *head)
 @end
 ```
 
-##3、有序数组合并算法
+## 3、有序数组合并算法
 
 ```
 @interface MergeSortedList : NSObject
@@ -164,7 +164,7 @@ void mergeList(int a[], int aLen, int b[], int bLen, int result[])
 @end
 ```
 
-##4、Hash算法
+## 4、Hash算法
 
 ```
 @interface HashFind : NSObject
@@ -212,7 +212,7 @@ char findFirstChar(char* cha){
 @end
 ```
 
-##5、查找两个子视图的共同父视图算法
+## 5、查找两个子视图的共同父视图算法
 
 ```
 @interface CommonSuperFind : NSObject
@@ -268,7 +268,7 @@ char findFirstChar(char* cha){
 
 @end
 ```
-##5、无序数组当中的中位数算法
+## 5、无序数组当中的中位数算法
 
 ```
 @interface MedianFind : NSObject
@@ -346,7 +346,7 @@ int PartSort(int a[], int start, int end)
 @end
 ```
 
-##6、递归实现全排列
+## 6、递归实现全排列
 
 ![](https://upload-images.jianshu.io/upload_images/325120-1f1bac3c424b3f47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 

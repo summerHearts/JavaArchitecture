@@ -35,25 +35,25 @@
 
 <!-- /TOC -->
 
-## 1. 概述
+##  1. 概述
 
-### 1.1. 分布式
+## # 1.1. 分布式
 
 分布式系统是一个由多个运行机器组成的系统，所有这些机器在一个集群中一起工作，对最终端用户表现为一个节点。
 
 Kafka 的分布式意义在于：它在不同的节点上存储、接收和发送消息。
 
-### 1.2. 容错
+## # 1.2. 容错
 
 分布式系统一般都会设计容错机制，保证集群中几个节点出现故障时，仍能对外提供服务。
 
-### 1.3. 提交日志
+## # 1.3. 提交日志
 
 提交日志（也称为预写日志，事务日志）是仅支持附加的持久有序数据结构。您不能修改或删除记录。它从左到右读取并保证项目排序。
 
 Kafka 实际上将所有的消息存储到磁盘，并在结构中对它们进行排序，以便利用顺序磁盘读取。
 
-### 1.4. 消息队列
+## # 1.4. 消息队列
 
 消息队列技术是分布式应用间交换信息的一种技术。消息队列可驻留在内存或磁盘上, 队列存储消息直到它们被应用程序读走。通过消息队列，应用程序可独立地执行--它们不需要知道彼此的位置、或在继续执行前不需要等待接收程序接收此消息。在分布式计算环境中，为了集成分布式应用，开发者需要对异构网络环境下的分布式应用提供有效的通信手段。为了管理需要共享的信息，对应用提供公共的信息交换机制是重要的。常用的消息队列技术是 Message Queue。
 
@@ -64,7 +64,7 @@ Message Queue 的通信模式：
 - **发布/订阅 (Publish/Subscribe)**：发布/订阅功能使消息的分发可以突破目的队列地理指向的限制，使消息按照特定的主题甚至内容进行分发，用户或应用程序可以根据主题或内容接收到所需要的消息。发布/订阅功能使得发送者和接收者之间的耦合关系变得更为松散，发送者不必关心接收者的目的地址，而接收者也不必关心消息的发送地址，而只是根据消息的主题进行消息的收发。
 - **集群 (Cluster)**：为了简化点对点通讯模式中的系统配置，MQ 提供 Cluster(集群) 的解决方案。集群类似于一个域 (Domain)，集群内部的队列管理器之间通讯时，不需要两两之间建立消息通道，而是采用集群 (Cluster) 通道与其它成员通讯，从而大大简化了系统配置。此外，集群中的队列管理器之间能够自动进行负载均衡，当某一队列管理器出现故障时，其它队列管理器可以接管它的工作，从而大大提高系统的高可靠性。
 
-### 1.5. 为什么要使用消息系统
+## # 1.5. 为什么要使用消息系统
 
 - 解耦
   在项目启动之初来预测将来项目会碰到什么需求，是极其困难的。消息系统在处理过程中间插入了一个隐含的、基于数据的接口层，两边的处理过程都要实现这一接口。这允许你独立的扩展或修改两边的处理过程，只要确保它们遵守同样的接口约束。
@@ -83,19 +83,19 @@ Message Queue 的通信模式：
 - 异步通信
   很多时候，用户不想也不需要立即处理消息。消息队列提供了异步处理机制，允许用户把一个消息放入队列，但并不立即处理它。想向队列中放入多少消息就放多少，然后在需要的时候再去处理它们。
 
-### 1.6. Kafka 的关键功能
+## # 1.6. Kafka 的关键功能
 
 - 发布和订阅流记录，类似于消息队列或企业级消息系统。
 - 以容错、持久化的方式存储流记录。
 - 处理流记录。
 
-### 1.7. Kafka 基本概念
+## # 1.7. Kafka 基本概念
 
 - Kafka 作为一个集群运行在一台或多台可以跨越多个数据中心的服务器上。
 - Kafka 集群在称为 Topic 的类别中存储记录流。
 - Kafka 的每个记录由一个键，一个值和一个时间戳组成。
 
-### 1.8. Kafka 核心 API
+## # 1.8. Kafka 核心 API
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-core-api.png" width="400"/>
@@ -108,7 +108,7 @@ Message Queue 的通信模式：
 
 在 Kafka 中，客户端和服务器之间的通信是采用 TCP 协议方式。
 
-### 1.9. Topic 和日志
+## # 1.9. Topic 和日志
 
 Topic 是一个目录名，它保存着发布记录。kafka 的 Topic 始终是多订阅者的，也就是说，一个主题可以有零个，一个或多个订阅写入数据的 Consumer。
 
@@ -132,7 +132,7 @@ Kafka 集群持久化保存（使用可配置的保留期限）所有发布记�
 
 日志中的 Partition 有多种目的。首先，它们允许日志的大小超出服务器限制的大小。每个单独的 Partition 必须适合承载它的服务器，但是一个主题可能有很多 Partition，因此它可以处理任意数量的数据。其次，它们作为并行的单位。
 
-## 2. Kafka 工作原理
+##  2. Kafka 工作原理
 
 - **Broker** - Kafka 集群包含一个或多个服务器，这种服务器被称为 broker。
 - **Topic** - 每条发布到 Kafka 集群的消息都有一个类别，这个类别被称为 Topic。（物理上不同 Topic 的消息分开存储，逻辑上一个 Topic 的消息虽然保存于一个或多个 broker 上但用户只需指定消息的 Topic 即可生产或消费数据而不必关心数据存于何处）。
@@ -159,7 +159,7 @@ Kafka 集群持久化保存（使用可配置的保留期限）所有发布记�
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-producer-consumer.png" width="640"/>
 </div>
 
-## 3. 持久化
+##  3. 持久化
 
 Kafka 实际上将其所有记录存储在磁盘中，并且不会将任何内容保留在 RAM 中。
 
@@ -171,7 +171,7 @@ Kafka 实际上将其所有记录存储在磁盘中，并且不会将任何内�
 
 所有这些优化都允许 Kafka 以接近网络速度传递消息。
 
-## 4. 复制
+##  4. 复制
 
 分区数据在多个代理中复制，以便在一个代理死亡的情况下保存数据。
 
@@ -191,7 +191,7 @@ Kafka 实际上将其所有记录存储在磁盘中，并且不会将任何内�
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-metadata-flow.png" width="640"/>
 </div>
 
-## 5. 流处理
+##  5. 流处理
 
 在 Kafka 中，流处理器是任何需要从输入主题中持续输入数据流，对该输入执行一些处理并生成输出主题的数据流（或外部服务，数据库，垃圾桶，无论哪里真的......）
 
@@ -203,7 +203,7 @@ Kafka 实际上将其所有记录存储在磁盘中，并且不会将任何内�
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-stream-processor.png" width="640"/>
 </div>
 
-### 5.1. 无状态处理
+## # 5.1. 无状态处理
 
 流的无状态处理是确定性处理，不依赖于任何外部。你知道，对于任何给定的数据，你将总是产生独立于其他任何东西的相同输出。
 
@@ -225,7 +225,7 @@ Kafka 流可以用同样的方式解释 - 当从最终状态积累时的事件�
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-table-as-stream.png" width="640"/>
 </div>
 
-### 5.2. 有状态处理
+## # 5.2. 有状态处理
 
 一些简单的操作，如 map() 或 filter() 是无状态的，并且不要求您保留有关处理的任何数据。但是，在现实生活中，你要做的大多数操作都是有状态的（例如 count()），因此需要存储当前的累积状态。
 
@@ -245,7 +245,7 @@ Kafka 流可以用同样的方式解释 - 当从最终状态积累时的事件�
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-stateful-process.png" width="640"/>
 </div>
 
-## 6. Kafka 应用场景
+##  6. Kafka 应用场景
 
 - 构建实时的流数据管道，在系统或应用间获取可靠数据。
 - 构建实时的流应用程序，用于转换或响应数据流。
@@ -260,13 +260,13 @@ Kafka 流可以用同样的方式解释 - 当从最终状态积累时的事件�
 
 Kafka 允许您轻松分离不同（微）服务之间的通信。利用 Streams API，现在比以往更容易编写业务逻辑，丰富了 Kafka 主题数据以便服务消费。
 
-## 7. 幂等性
+##  7. 幂等性
 
 幂等性引入目的：生产者重复生产消息。生产者进行 retry 会产生重试时，会重复产生消息。有了幂等性之后，在进行 retry 重试时，只会生成一个消息。
 
-### 7.1. 幂等性实现
+## # 7.1. 幂等性实现
 
-#### 7.1.1. PID 和 Sequence Number
+## ##  7.1.1. PID 和 Sequence Number
 
 为了实现 Producer 的幂等性，Kafka 引入了 Producer ID（即 PID）和 Sequence Number。
 
@@ -281,7 +281,7 @@ Broker 端在缓存中保存了这 seq number，对于接收的每条消息，�
 
 ![2](http://www.heartthinkdo.com/wp-content/uploads/2018/05/2.png)
 
-#### 7.1.2. 生成 PID 的流程
+## ##  7.1.2. 生成 PID 的流程
 
 在执行创建事务时，如下：
 
@@ -307,7 +307,7 @@ void run(long now) {
                    ........
 ```
 
-### 7.2. 幂等性的应用实例
+## # 7.2. 幂等性的应用实例
 
 （1）配置属性
 
@@ -378,9 +378,9 @@ Exception in thread “main” java.lang.IllegalStateException: Transactional me
     at org.apache.kafka.clients.producer.KafkaProducer.initTransactions(KafkaProducer.java:544)
 ```
 
-## 8. 事务
+##  8. 事务
 
-### 8.1. 事务属性理解
+## # 8.1. 事务属性理解
 
 事务属性是 2017 年 Kafka 0.11.0.0 引入的新特性。类似于数据库事务，只是这里的数据源是 Kafka，**kafka 事务属性是指一系列的生产者生产消息和消费者提交偏移量的操作在一个事务，或者说是是一个原子操作），同时成功或者失败**。
 
@@ -395,7 +395,7 @@ void  kakfa_in_tranction() {
 }
 ```
 
-### 8.2. 引入事务目的
+## # 8.2. 引入事务目的
 
 在事务属性之前先引入了生产者幂等性，它的作用为：
 
@@ -404,7 +404,7 @@ void  kakfa_in_tranction() {
 
 **消费者提交偏移量导致重复消费消息的场景**：消费者在消费消息完成提交便宜量 o2 之前挂掉了（假设它最近提交的偏移量是 o1），此时执行再均衡时，其它消费者会重复消费消息(o1 到 o2 之间的消息）。
 
-### 8.3. 事务操作的 API
+## # 8.3. 事务操作的 API
 
 producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransaction, abortTransaction 五个事务方法。
 
@@ -446,7 +446,7 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
     public void abortTransaction() throws ProducerFencedException ;
 ```
 
-### 8.4. 事务属性的应用实例
+## # 8.4. 事务属性的应用实例
 
 在一个原子操作中，根据包含的操作类型，可以分为三种情况，**前两种情况是事务引入的场景**，最后一种情况没有使用价值。
 
@@ -456,7 +456,7 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
 
 只有 consumer 消费消息，这种操作其实没有什么意义，跟使用手动提交效果一样，而且也不是事务属性引入的目的，所以一般不会使用这种情况
 
-#### 8.4.1. 相关属性配置
+## ##  8.4.1. 相关属性配置
 
 使用 kafka 的事务 api 时的一些注意事项：
 
@@ -465,7 +465,7 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
 - 生产者不需要再配置 enable.idempotence，因为如果配置了 transaction.id，则此时 enable.idempotence 会被设置为 true
 - 消费者需要配置 Isolation.level。在 consume-trnasform-produce 模式下使用事务时，必须设置为 READ_COMMITTED。
 
-#### 8.4.2. 只有写
+## ##  8.4.2. 只有写
 
 创建一个事务，在这个事务操作中，只有生成消息操作。代码如下：
 
@@ -559,7 +559,7 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
     }
 ```
 
-#### 8.4.3. 消费-生产并存（consume-transform-produce）
+## ##  8.4.3. 消费-生产并存（consume-transform-produce）
 
 在一个事务中，既有生产消息操作又有消费消息操作，即常说的 Consume-tansform-produce 模式。如下实例代码
 
@@ -650,7 +650,7 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
     }
 ```
 
-#### 8.4.4. 只有读
+## ##  8.4.4. 只有读
 
 创建一个事务，在这个事务操作中，只有生成消息操作，如下代码。这种操作其实没有什么意义，跟使用手动提交效果一样，无法保证消费消息操作和提交偏移量操作在一个事务。
 
@@ -702,13 +702,13 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
     }
 ```
 
-### 8.5. 生产者事务的实现
+## # 8.5. 生产者事务的实现
 
-#### 8.5.1. 相关配置
+## ##  8.5.1. 相关配置
 
-#### 8.5.2. 幂等性和事务性的关系
+## ##  8.5.2. 幂等性和事务性的关系
 
-##### 两者关系
+## ## # 两者关系
 
 事务属性实现前提是幂等性，即在配置事务属性 transaction id 时，必须还得配置幂等性；但是幂等性是可以独立使用的，不需要依赖事务属性。
 
@@ -722,7 +722,7 @@ producer 提供了 initTransactions, beginTransaction, sendOffsets, commitTransa
 - enable.idempotence = false，transactional.id 不设置：没有事务属性和幂等性的 kafka
 - enable.idempotence = false，transactional.id 设置：无法获取到 PID，此时会报错
 
-##### tranaction id 、productid 和 epoch
+## ## # tranaction id 、productid 和 epoch
 
 **一个 app 有一个 tid，同一个应用的不同实例 PID 是一样的，只是 epoch 的值不同**。如：
 
@@ -756,7 +756,7 @@ org.apache.kafka.common.errors.ProducerFencedException: Producer attempted an op
 
 - 跨 Session 的数据幂等发送。当具有相同 Transaction ID 的新的 Producer 实例被创建且工作时，旧的且拥有相同 Transaction ID 的 Producer 将不再工作【上面的实例可以验证】。kafka 保证了关联同一个事务的所有 producer（一个应用有多个实例）必须按照顺序初始化事务、和提交事务，否则就会有问题，这保证了同一事务 ID 中消息是有序的（不同实例得按顺序创建事务和提交事务）。
 
-#### 8.5.3. 事务最佳实践-单实例的事务性
+## ##  8.5.3. 事务最佳实践-单实例的事务性
 
 通过上面实例中可以看到 kafka 是跨 Session 的数据幂等发送，即如果应用部署多个实例时常会遇到上面的问题“_org.apache.kafka.common.errors.ProducerFencedException: Producer attempted an operation with an old epoch. Either there is a newer producer with the same transactionalId, or the producer’s transaction has been expired by the broker_.”，必须保证这些实例生产者的提交事务顺序和创建顺序保持一致才可以，否则就无法成功。其实，在实践中，我们更多的是**如何实现对应用单实例的事务性**。可以通过 spring-kafaka 实现思路来学习，即**每次创建生产者都设置一个不同的 transactionId 的值**，如下代码：
 
@@ -818,7 +818,7 @@ protected Producer<K, V> createTransactionalProducer() {
 }
 ```
 
-#### 8.5.4. Consume-transform-Produce 的流程
+## ##  8.5.4. Consume-transform-Produce 的流程
 
 ![Snip20180504_56](http://www.heartthinkdo.com/wp-content/uploads/2018/05/Snip20180504_56.png)
 
@@ -926,7 +926,7 @@ WriteTxnMarkersRequest => [CoorinadorEpoch PID Epoch Marker [Topic [Partition]]]
 
 - 只会保留这个事务对应的 PID 和 timstamp。然后把当前事务其他相关消息删除掉，包括 PID 和 tranactionId 的映射关系。
 
-##### 文件类型和查看命令
+## ## # 文件类型和查看命令
 
 kafka 文件主要包括 broker 的 data（主题：test）、事务协调器对应的 transaction_log（主题：\_\_tranaction_state）、偏移量信息（主题:\_consumer_offsets）三种类型。如下图
 
@@ -945,17 +945,17 @@ kafka 文件主要包括 broker 的 data（主题：test）、事务协调器对
 
 bin/kafka-run-class.sh kafka.tools.DumpLogSegments –files /Users/wuzhonghu/data/kafka-logs/firtstopic-0/00000000000000000002.log –print-data-log
 
-##### ControlMessage 和 Transaction markers
+## ## # ControlMessage 和 Transaction markers
 
 Trasaction markers 就是 kafka 为了实现事务定义的 Controll Message。这个消息和数据消息都存放在 log 中，在 Consumer 读取事务消息时有用，可以参考下面章节-4.5.1 老版本-读取事务消息顺序。
 
-##### Transaction Coordinator 和 Transaction Log
+## ## # Transaction Coordinator 和 Transaction Log
 
 Transaction Log 如下放置在“\_tranaction_state”主题下面，默认是 50 个分区，每一个分区中文件格式和 broker 存储消息是一样的,都有 log/index/timeindex 文件，如下：
 
 ![57646045](http://www.heartthinkdo.com/wp-content/uploads/2018/05/57646045.png)
 
-#### 8.5.5. 消费读取事务消息(READ_COMMITED)
+## ##  8.5.5. 消费读取事务消息(READ_COMMITED)
 
 Consumer 为了实现事务，新增了一个 isolation.level 配置，有两个值如下，
 
@@ -964,7 +964,7 @@ Consumer 为了实现事务，新增了一个 isolation.level 配置，有两个
 
 在本小节中我们主要讲 READ_COMMITED 模式下读取消息的流程的两种版本的演化
 
-##### 老版本-读取事务消息顺序
+## ## # 老版本-读取事务消息顺序
 
 如下图中，按顺序保存到 broker 中消息有：事务 1 消息 T1-M1、对于事务 2 的消息有 T2-M1、事务 1 消息 T1-M2、非事务消息 M1，最终到达 client 端的循序是 M1-> T2-M1 -> T1-M1 -> T1-M2。
 
@@ -976,7 +976,7 @@ Consumer 为了实现事务，新增了一个 isolation.level 配置，有两个
 - **step2** Consumer 接受到事务 2 的控制消息 T2-C，此时就把事务消息 T2-M1 发送给 Clinet。
 - **step3** C onsumer 接受到事务 1 的控制消息 T1-C,此时就把事务消息 T1-M1 和 T1-M2 发送给 Client
 
-##### 新版本-读取事务消息顺序
+## ## # 新版本-读取事务消息顺序
 
 第一种方式，需要在 consumer 客户端缓存消息，当存在耗时比较长的事务时，占用客户端大量的内存资源。为了解决这个问题，通过 LSO 和 Abort Index 文件来解决这个问题，参考：
 
@@ -1052,7 +1052,7 @@ ThrottleTime [TopicName [Partition ErrorCode HighwaterMarkOffset AbortedTransact
 
 ![13](http://www.heartthinkdo.com/wp-content/uploads/2018/05/13-300x103.png)
 
-##### Absorted Transaction Index
+## ## # Absorted Transaction Index
 
 在 broker 中数据中新增一个索引文件，保存 aborted tranasation 对应的 offsets，只有事务执行 abort 时，才会往这个文件新增一个记录，初始这个文件是不存在的，只有第一条 abort 时，才会创建这个文件。
 
@@ -1086,13 +1086,13 @@ Broker 在缓存中维护了所有处于运行状态的事务对应的 initial o
 
 (3)第三步 从 active 的 tranaction set 中移除这个 transaton，然后更新 LSO。
 
-##### 问题
+## ## # 问题
 
 1、问题 1：producer 通过事务提交消息时抛异常了， 对于使用非事务的消费者，是否可以获取此消息？
 
 对于事务消息，必须是执行 commit 或者 abstort 之后，消息才对消费者可见，即使是非事务的消费者。只是非事务消费者相比事务消费者区别，在于可以读取执行了 absort 的消息。
 
-### 8.6. 其他思考
+## # 8.6. 其他思考
 
 1、如何保证消息不丢。
 
@@ -1116,13 +1116,13 @@ Broker 在缓存中维护了所有处于运行状态的事务对应的 initial o
 
 （1）kakfka 幂等性
 
-## 9. 资料
+##  9. 资料
 
-### 9.1. 官方资料
+## # 9.1. 官方资料
 
 [Github](https://github.com/apache/kafka) | [官方文档](https://kafka.apache.org/documentation/)
 
-### 9.2. 第三方资料
+## # 9.2. 第三方资料
 
 - [Kafka Manager](https://github.com/yahoo/kafka-manager) - Kafka 管理工具
 - [Kafka 剖析（一）：Kafka 背景及架构介绍](http://www.infoq.com/cn/articles/kafka-analysis-part-1)

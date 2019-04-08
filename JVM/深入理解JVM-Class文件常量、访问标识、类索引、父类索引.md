@@ -1,4 +1,4 @@
-##深入理解JVM-Class文件常量、访问标识、类索引、父类索引
+## 深入理解JVM-Class文件常量、访问标识、类索引、父类索引
 
 - Java字节码类文件（.class）是Java编译器编译Java源文件（.java）产生的“目标文件”。它是一种8位字节的二进制流文件， 各个数据项按顺序紧密的从前向后排列， 相邻的项之间没有间隙， 这样可以使得class文件非常紧凑， 体积轻巧， 可以被JVM快速的加载至内存， 并且占据较少的内存空间（方便于网络的传输）。
 
@@ -21,7 +21,7 @@
   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-08-214_13-46-26.png)
 
 
-##2、Class文件的构成
+## 2、Class文件的构成
 
 - 2.1.魔数
    - class文件的头4个字节称为魔数，它的唯一作用是确定这个文件能否为一个能被虚拟机接受的Class文件。魔数的作用就相当于文件后缀名，只不过后缀名容易被修改，不安全，因此在class文件中标示文件类型比较合适。class文件的魔数是用16进制表示的“CAFEBABE”。
@@ -161,7 +161,7 @@ JDK 1.1 = 45
    -  bootstrap_method_attr_index项的值必须是对当前Class文件中引导方法表的bootstrap_methods[]数组的有效索引。
    - name_and_type_index项的值必须是对当前常量池的有效索引，常量池在该索引处的项必须是CONSTANT_NameAndType_info结构，表示方法名和方法描述符。
 
-##4. access_flags:访问标志
+## 4. access_flags:访问标志
 
 - 访问标志，access_flags是一种掩码标志，用于表示某个类或者接口的访问权限及基础属性。access_flags的取值范围和相应含义见下表。
    
@@ -172,7 +172,7 @@ JDK 1.1 = 45
     
     ![](https://www.icheesedu.com/images/qiniu/Xnip2018-08-214_16-53-01.png)
 
-##5. this_class:类索引
+## 5. this_class:类索引
 
 - this_class的值必须是对constant_pool表中项目的一个有效索引值。
 
@@ -183,7 +183,7 @@ JDK 1.1 = 45
       ![](https://www.icheesedu.com/images/qiniu/3232323.png)
 
 
-##6. super_class：父类索引
+## 6. super_class：父类索引
 
 - 表示这个Class文件所定义的类的直接父类,如果Class文件的super_class的值为0，那这个Class文件只可能是定义的是java.lang.Object类，只有它是唯一没有父类的类
 - 是一个对constant_pool表中项目的一个有效索引值，表示指向常量池的第几个位置。

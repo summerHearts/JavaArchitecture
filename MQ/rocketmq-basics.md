@@ -17,15 +17,15 @@
 
 <!-- /TOC -->
 
-## 概述
+##  概述
 
-### 简介
+## # 简介
 
 RocketMQ 是一款开源的分布式消息队列，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。
 
 RocketMQ 被阿里巴巴捐赠给 Apache，成为 Apache 的孵化项目。
 
-### 核心概念
+## # 核心概念
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/rocketmq/rmq-model.png" />
@@ -46,16 +46,16 @@ RocketMQ 有以下核心概念：
   - **Message Queue** - 主题被划分为一个或多个子主题“消息队列”。
   - **Tag** - 即子主题，为用户提供了额外的灵活性。对于 Tag，来自同一业务模块的具有不同目的的消息可以具有相同的主题和不同的 Tag。
 
-## 安装
+##  安装
 
-### 环境要求
+## # 环境要求
 
 - 推荐 64 位操作系统：Linux/Unix/Mac
 - 64bit JDK 1.8+
 - Maven 3.2.x
 - Git
 
-### 下载解压
+## # 下载解压
 
 进入官方下载地址：https://rocketmq.apache.org/dowloading/releases/，选择合适版本
 
@@ -68,7 +68,7 @@ RocketMQ 有以下核心概念：
 > cd rocketmq-all-4.2.0/
 ```
 
-### 启动 Name Server
+## # 启动 Name Server
 
 ```sh
 > nohup sh bin/mqnamesrv &
@@ -76,7 +76,7 @@ RocketMQ 有以下核心概念：
 The Name Server boot success...
 ```
 
-### 启动 Broker
+## # 启动 Broker
 
 ```sh
 > nohup sh bin/mqbroker -n localhost:9876 -c conf/broker.conf &
@@ -84,7 +84,7 @@ The Name Server boot success...
 The broker[%s, 172.30.30.233:10911] boot success...
 ```
 
-### 收发消息
+## # 收发消息
 
 执行收发消息操作之前，不许告诉客户端命名服务器的位置。在 RocketMQ 中有多种方法来实现这个目的。这里，我们使用最简单的方法——设置环境变量 `NAMESRV_ADDR` ：
 
@@ -97,7 +97,7 @@ SendResult [sendStatus=SEND_OK, msgId= ...
 ConsumeMessageThread_%d Receive New Messages: [MessageExt...
 ```
 
-### 关闭服务器
+## # 关闭服务器
 
 ```sh
 > sh bin/mqshutdown broker
@@ -109,7 +109,7 @@ The mqnamesrv(36664) is running...
 Send shutdown request to mqnamesrv(36664) OK
 ```
 
-## API
+##  API
 
 首先在项目中引入 maven 依赖：
 
@@ -121,7 +121,7 @@ Send shutdown request to mqnamesrv(36664) OK
 </dependency>
 ```
 
-### Producer
+## # Producer
 
 Producer 在 RocketMQ 中负责发送消息。
 
@@ -131,7 +131,7 @@ RocketMQ 有三种消息发送方式：
 - 可靠的异步发送
 - 单项发送
 
-#### 可靠的同步发送
+## ##  可靠的同步发送
 
 可靠的同步传输用于广泛的场景，如重要的通知消息，短信通知，短信营销系统等。
 
@@ -160,7 +160,7 @@ public class SyncProducer {
 }
 ```
 
-#### 可靠的异步发送
+## ##  可靠的异步发送
 
 异步传输通常用于响应时间敏感的业务场景。
 
@@ -198,7 +198,7 @@ public class AsyncProducer {
 }
 ```
 
-#### 单向传输
+## ##  单向传输
 
 单向传输用于需要中等可靠性的情况，例如日志收集。
 
@@ -226,7 +226,7 @@ public class OnewayProducer {
 }
 ```
 
-### Consumer
+## # Consumer
 
 Consumer 在 RocketMQ 中负责接收消息。
 
@@ -272,9 +272,9 @@ public class OrderedConsumer {
 }
 ```
 
-### FAQ
+## # FAQ
 
-#### connect to <172.17.0.1:10909> failed
+## ##  connect to <172.17.0.1:10909> failed
 
 启动后，Producer 客户端连接 RocketMQ 时报错：
 
@@ -314,7 +314,7 @@ brokerIP1 = 10.10.30.63
 nohup sh bin/mqbroker -n localhost:9876 -c conf/broker.conf &
 ```
 
-## 资料
+##  资料
 
 - [RocketMQ 官方文档](http://rocketmq.apache.org/docs/quick-start/)
 

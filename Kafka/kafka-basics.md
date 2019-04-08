@@ -39,9 +39,9 @@
 
 <!-- /TOC -->
 
-## 1. 概述
+##  1. 概述
 
-### 1.1. 简介
+## # 1.1. 简介
 
 Kafka 是一个分布式的、可水平扩展的、基于发布/订阅模式的、支持容错的 MQ 中间件。具有如下特点：
 
@@ -51,9 +51,9 @@ Kafka 是一个分布式的、可水平扩展的、基于发布/订阅模式的�
 
 通过 Partition 来实现多个生产者（同一个 topic 消息根据 key 放置到一个 Partition 中）和多个消费者（一个 Partition 由消费者群组中每一个消费者来负责）。
 
-### 1.2. 系统结构和存储结构
+## # 1.2. 系统结构和存储结构
 
-#### 1.2.1. 系统结构
+## ##  1.2.1. 系统结构
 
 producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式从 broker 接受消息。
 
@@ -66,7 +66,7 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka系统结构.png" />
 </div>
 
-#### 1.2.2. Topic 的存储结构
+## ##  1.2.2. Topic 的存储结构
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/topic存储结构.png" />
@@ -77,7 +77,7 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 - **Segment** - 是 Partition 目录下的文件，保存存储消息。
 - **索引** - 方便查询 segment
 
-#### 1.2.3. Segment 文件格式
+## ##  1.2.3. Segment 文件格式
 
 可以把 topic 当做一个数据表，表中每一个记录都是 key,value 形式，如下图。
 
@@ -87,7 +87,7 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/kafka/kafka-segment结构.png" />
 </div>
 
-### 1.3. 小结
+## # 1.3. 小结
 
 **（1）一个主题存在多个分区，每一分区属于哪个 leader broker?**
 
@@ -111,11 +111,11 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 
 因为 kafkaf 只保证一个分区内的消息才有时序性，所以只要消息属于同一个 topic 且在同一个分区内，就可以保证 kafka 消费消息是有顺序的了。
 
-## 2. 安装部署
+##  2. 安装部署
 
 环境要求：JDK8、ZooKeeper
 
-### 2.1. 下载解压
+## # 2.1. 下载解压
 
 进入官方下载地址：http://kafka.apache.org/downloads，选择合适版本。
 
@@ -128,7 +128,7 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 
 现在您已经在您的机器上下载了最新版本的 Kafka。
 
-### 2.2. 启动服务器
+## # 2.2. 启动服务器
 
 由于 Kafka 依赖于 ZooKeeper，所以运行前需要先启动 ZooKeeper
 
@@ -147,7 +147,7 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 ...
 ```
 
-### 2.3. 停止服务器
+## # 2.3. 停止服务器
 
 执行所有操作后，可以使用以下命令停止服务器
 
@@ -155,7 +155,7 @@ producer 采用 push 方式向 broker 发送消息；customer 采用 pull 方式
 $ bin/kafka-server-stop.sh config/server.properties
 ```
 
-### 2.4. 创建主题
+## # 2.4. 创建主题
 
 创建一个名为 test 的 Topic，这个 Topic 只有一个分区以及一个备份：
 
@@ -163,7 +163,7 @@ $ bin/kafka-server-stop.sh config/server.properties
 > bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 ```
 
-### 2.5. 生产者生产消息
+## # 2.5. 生产者生产消息
 
 运行生产者，然后可以在控制台中输入一些消息，这些消息会发送到服务器：
 
@@ -173,7 +173,7 @@ This is a message
 This is another message
 ```
 
-### 2.6. 消费者消费消息
+## # 2.6. 消费者消费消息
 
 启动消费者，然后获得服务器中 Topic 下的消息：
 
@@ -183,7 +183,7 @@ This is a message
 This is another message
 ```
 
-### 2.7. 集群部署
+## # 2.7. 集群部署
 
 复制配置为多份（Windows 使用 copy 命令代理）：
 
@@ -239,7 +239,7 @@ Topic:my-replicated-topic   PartitionCount:1    ReplicationFactor:3 Configs:
 - replicas - 是复制此分区日志的节点列表，无论它们是否为领导者，或者即使它们当前处于活动状态。
 - isr - 是“同步”复制品的集合。这是副本列表的子集，该列表当前处于活跃状态并且已经被领导者捕获。
 
-## 3. API
+##  3. API
 
 Stream API 的 maven 依赖：
 
@@ -261,9 +261,9 @@ Stream API 的 maven 依赖：
 </dependency>
 ```
 
-## 4. 生产者（Producer）
+##  4. 生产者（Producer）
 
-### 4.1. 发送消息流程
+## # 4.1. 发送消息流程
 
 发送消息流程如下图，需要注意的有：
 
@@ -285,9 +285,9 @@ Stream API 的 maven 依赖：
 <img src="http://upload-images.jianshu.io/upload_images/3101171-3d7aab3ba2ba13f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
 </div>
 
-### 4.2. 发送消息方式
+## # 4.2. 发送消息方式
 
-#### 4.2.1. 发送并忘记（fire-and-forget）
+## ##  4.2.1. 发送并忘记（fire-and-forget）
 
 代码如下，直接通过 send 方法来发送
 
@@ -301,7 +301,7 @@ ProducerRecord<String, String> record =
 }
 ```
 
-#### 4.2.2. 同步发送
+## ##  4.2.2. 同步发送
 
 代码如下，与“发送并忘记”的方式区别在于多了一个 get()方法，会一直阻塞等待 broker 返回结果：
 
@@ -315,7 +315,7 @@ ProducerRecord<String, String> record =
 }
 ```
 
-#### 4.2.3. 异步发送
+## ##  4.2.3. 异步发送
 
 代码如下，异步方式相对于“发送并忘记”的方式的不同在于，在异步返回时可以执行一些操作，如记录错误或者成功日志。
 
@@ -340,7 +340,7 @@ ProducerRecord<String, String> record =
 producer.send(record, new DemoProducerCallback());
 ```
 
-#### 4.2.4. 发送消息示例
+## ##  4.2.4. 发送消息示例
 
 ```java
 import java.util.Properties;
@@ -389,11 +389,11 @@ public class ProducerDemo {
 }
 ```
 
-## 5. 消费者（Consumer）
+##  5. 消费者（Consumer）
 
-### 5.1. 消费者和消费者群组
+## # 5.1. 消费者和消费者群组
 
-#### 5.1.1. 消费者介绍
+## ##  5.1.1. 消费者介绍
 
 消费者以**pull 方式**从 broker 拉取消息，消费者可以订阅一个或多个主题，然后按照消息生成顺序（**kafka 只能保证分区中消息的顺序**）读取消息。
 
@@ -403,7 +403,7 @@ public class ProducerDemo {
 <img src="http://upload-images.jianshu.io/upload_images/3101171-360a63cf628c7b3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
 </div>
 
-#### 5.1.2. 消费者分区组
+## ##  5.1.2. 消费者分区组
 
 消费者群组可以实现并发的处理消息。一个消费者群组作为消费一个 topic 消息的单元，每一个 Partition 只能隶属于一个消费者群组中一个 customer，如下图
 
@@ -411,7 +411,7 @@ public class ProducerDemo {
 <img src="http://www.heartthinkdo.com/wp-content/uploads/2018/05/6-1-259x300.png" />
 </div>
 
-#### 5.1.3. 消费者区组的再均衡
+## ##  5.1.3. 消费者区组的再均衡
 
 当在群组里面 新增/移除消费者 或者 新增/移除 kafka 集群 broker 节点 时，群组协调器 Broker 会触发再均衡，重新为每一个 Partition 分配消费者。**再均衡期间，消费者无法读取消息，造成整个消费者群组一小段时间的不可用。**
 
@@ -435,9 +435,9 @@ public class ProducerDemo {
 <img src="http://upload-images.jianshu.io/upload_images/3101171-fd4ab296c5dbeb24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
 </div>
 
-### 5.2. 消费消息流程
+## # 5.2. 消费消息流程
 
-#### 5.2.1. 消费流程 demo
+## ##  5.2.1. 消费流程 demo
 
 具体步骤如下
 
@@ -493,7 +493,7 @@ public Consumer buildCustomer() {
 }
 ```
 
-#### 5.2.2. 消费消息方式
+## ##  5.2.2. 消费消息方式
 
 分为订阅主题和指定分组两种方式：
 
@@ -546,7 +546,7 @@ public void consumeMessageForIndependentConsumer(String topic){
 }
 ```
 
-#### 5.2.3. 轮询获取消息
+## ##  5.2.3. 轮询获取消息
 
 通过 poll 来获取消息，但是获取消息时并不是立刻返回结果，需要考虑两个因素：
 
@@ -561,9 +561,9 @@ poll 处了获取消息外，还有其他作用，如下：
 
 - 发送心跳信息。消费者通过向被指派为群组协调器的 broker 发送心跳来维护他和群组的从属关系，当机器宕掉后，群组协调器触发再分配
 
-### 5.3. 提交偏移量
+## # 5.3. 提交偏移量
 
-#### 5.3.1. 偏移量和提交
+## ##  5.3.1. 偏移量和提交
 
 （1）偏移量
 
@@ -613,7 +613,7 @@ b. 手动提交
 
 除了自动提交，还可以进行手动提交，手动提交就是通过代码调用函数的方式提交，在使用手动提交时首先需要将 auto.commit.commit 设置为 false，目前有三种方式：同步提交、异步提交、同步和异步结合。
 
-#### 5.3.2. 同步提交
+## ##  5.3.2. 同步提交
 
 可以通过 commitSync 来进行提交，**同步提交会一直提交直到成功**。如下
 
@@ -647,7 +647,7 @@ public void customerMessageWithSyncCommit(String topic) {
 }
 ```
 
-#### 5.3.3. 异步提交
+## ##  5.3.3. 异步提交
 
 同步提交一个缺点是，在进行提交 commitAysnc()会阻塞整个下面流程。所以引入了异步提交 commitAsync()，如下代码，这里定义了 OffsetCommitCallback，也可以只进行 commitAsync()，不设置任何参数。
 
@@ -684,7 +684,7 @@ public void customerMessageWithAsyncCommit(String topic) {
 }
 ```
 
-#### 5.3.4. 同步和异步提交
+## ##  5.3.4. 同步和异步提交
 
 代码如下：
 
@@ -724,7 +724,7 @@ public void customerMessageWithSyncAndAsyncCommit(String topic) {
 }
 ```
 
-### 5.4. 从指定偏移量获取数据
+## # 5.4. 从指定偏移量获取数据
 
 我们读取消息是通过 poll 方法。它根据消费者客户端本地保存的当前偏移量来获取消息。如果我们需要从指定偏移量位置获取数据，此时就需要修改这个值为我们想要读取消息开始的地方，目前有如下三个方法：
 
@@ -756,13 +756,13 @@ public void customerMessageWithSyncAndAsyncCommit(String topic) {
     }
 ```
 
-## 6. Broker
+##  6. Broker
 
-### 6.1. 集群控制器
+## # 6.1. 集群控制器
 
 控制器除了具有一般 broker 的功能，还负责分区 leader 的选举。
 
-### 6.2. 分区 leader 和 follower
+## # 6.2. 分区 leader 和 follower
 
 Kafka 在 0.8 以前的版本中，如果一个 broker 机器宕机了，其上面的 Partition 都不能用了。为了实现 High Availablity，引入了复制功能，即一个 Partition 还会在其他的 broker 上面进行备份。为了实现复制功能，引入了分区 leader 和 follower：
 
@@ -782,7 +782,7 @@ Kafka 在 0.8 以前的版本中，如果一个 broker 机器宕机了，其上�
 <img src="http://upload-images.jianshu.io/upload_images/3101171-371ef1888b65edc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
 </div>
 
-### 6.3. 群组协调器
+## # 6.3. 群组协调器
 
 群组协调器，顾名思义就是维护消费者群组 ，消费者通过向被指派为群组协调器的 broker（不同的群组可以有不同的协调器）发送心跳来维护它们和群组的从属关系，以及它们对分区的所有权。
 
@@ -790,9 +790,9 @@ Kafka 在 0.8 以前的版本中，如果一个 broker 机器宕机了，其上�
 
 只要消费者以正常的时间间隔发送心跳，就会被认为是活跃的。消费者是通过 poll 获取消息时，发送的心跳的，当消费者客户端宕机之后，群组协调器在一段内没有收到心跳，则此时会认为消费者已死亡，然后触发一次再均衡。具体再均衡流程，可以参考上面的“再均衡”小节。
 
-## 7. Zookeeper 集群
+##  7. Zookeeper 集群
 
-### 7.1. 节点信息
+## # 7.1. 节点信息
 
 参考：<https://cwiki.apache.org/confluence/display/KAFKA/Kafka+data+structures+in+Zookeeper>
 
@@ -808,7 +808,7 @@ Zookeeper 保存的就是节点信息和节点状态，不会保存 kafka 的消
 <img src="http://upload-images.jianshu.io/upload_images/3101171-8074b42933b41d33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
 </div>
 
-#### 7.1.1. broker
+## ##  7.1.1. broker
 
 （1）Topic 的注册信息
 
@@ -896,7 +896,7 @@ Example:
 }
 ```
 
-#### 7.1.2. controller 和 controller_epoch
+## ##  7.1.2. controller 和 controller_epoch
 
 （1）控制器的 epoch:
 
@@ -906,7 +906,7 @@ Example:
 
 /controller -> int (broker id of the controller)
 
-#### 7.1.3. consumer
+## ##  7.1.3. consumer
 
 （1）消费者注册信息:
 
@@ -947,7 +947,7 @@ A blacklist subscription:
 }
 ```
 
-#### 7.1.4. admin
+## ##  7.1.4. admin
 
 （1）Re-assign partitions
 
@@ -1067,7 +1067,7 @@ Example:
 
 /admin/delete_topics/[topic_to_be_deleted] (the value of the path in empty)
 
-#### 7.1.5. config
+## ##  7.1.5. config
 
 Topic Configuration
 
@@ -1086,11 +1086,11 @@ Topic Configuration
 }
 ```
 
-### 7.2. zookeeper 一些总结
+## # 7.2. zookeeper 一些总结
 
 离开了 Zookeeper, Kafka 不能对 Topic 进行新增操作, 但是仍然可以 produce 和 consume 消息.
 
-## 8. 资料
+##  8. 资料
 
 - [Kafka(03) Kafka 介绍](http://www.heartthinkdo.com/?p=2006#233)
 

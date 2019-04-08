@@ -1,4 +1,4 @@
-##1、runtime（运行时机制）是什么
+## 1、runtime（运行时机制）是什么
 
 - runtime是属于OC的底层，是一套比较底层的纯C语言API, 属于1个C语言库, 包含了很多底层的C语言API，可以进行一些非常底层的操作(用OC是无法现实的, 不好实现)。 在我们平时编写的OC代码中, 程序运行过程时, 其实最终都是转成了runtime的C语言代码, runtime算是OC的幕后工作者。
 
@@ -11,12 +11,12 @@
     objc_msgSend(objc_msgSend("MJPerson" , "alloc"), "init")
     ```
 
-##2、runtime知识图谱
+## 2、runtime知识图谱
 
 ![](https://upload-images.jianshu.io/upload_images/325120-5c2405e9805ec022.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 
-##3、runtime数据结构
+## 3、runtime数据结构
 
 ![](https://upload-images.jianshu.io/upload_images/325120-d4723349b859c269.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
@@ -342,7 +342,7 @@ struct method_t {
 
 
 
-##4、类对象与元类对象&消息传递相关面试问题
+## 4、类对象与元类对象&消息传递相关面试问题
 
 - **类对象**存储实例方法列表等信息。
 
@@ -388,7 +388,7 @@ struct method_t {
   ![](https://www.icheesedu.com/images/2.png)
 
 
-##5、消息转发流程
+## 5、消息转发流程
 
 关于消息转发的流程，其实是系统给的一个消息再利用的过程，当消息传递流程中没有方法来响应此消息时，开发者可通过重写以下这四个方法来实现消息转发的过程，以及去让计算机做相应的工作。
 
@@ -414,18 +414,18 @@ struct method_t {
 
  ![](https://www.icheesedu.com/images/message_forward_example.png)
    
-##6、Method-Swizzling
+## 6、Method-Swizzling
 
 ![](https://www.icheesedu.com/images/Method-Swizzling.png)
 
 ![](https://www.icheesedu.com/images/Method-Swizzling_example.png)
 
 
-##7、动态添加方法
+## 7、动态添加方法
 
 ![](https://www.icheesedu.com/images/动态添加test方法的实现.png)
 
-##8、动态方法解析
+## 8、动态方法解析
 
  - @dynamic
 

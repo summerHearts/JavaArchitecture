@@ -1,10 +1,10 @@
-##1、设计原则
+## 1、设计原则
 
 ![](https://upload-images.jianshu.io/upload_images/325120-9111dcfc07dee09f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 前面五种被称为面向对象设计中常用的SOLID原则。
 
-##1、责任链模式
+## 1、责任链模式
 
 - 责任链模式就是为一个请求或者一个动作创建一个接收者对象的链,这条链上的每一个对象都可以去响应和处理这个请求和动作,把发送者和接收者进行解耦,在这种模式中，通常每个接收者都包含对另一个接收者的引用。如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推。
 
@@ -43,7 +43,7 @@ UIView中有两个方法用来确定hit-test view.
 
 ![](https://upload-images.jianshu.io/upload_images/325120-5f4ee665c225bd28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
-##1.1、责任链模式实战
+## 1.1、责任链模式实战
 
 ![](https://upload-images.jianshu.io/upload_images/325120-3c958affaab2fceb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
@@ -156,7 +156,7 @@ void chainOfResponsibility() {
 
 - 缺点： 每个请求都是从链头遍历到链尾，如果链比较长会产生一定的性能问题，调试起来也比较麻烦。
 
-##2、桥接模式
+## 2、桥接模式
 
 ```
 
@@ -309,7 +309,7 @@ remoteControl.tvProtocol = tvProtocol;
 ```
 桥接模式在UIKit和Foundation中的使用场景,比如，同一界面中在不同的用户等级（如游客模式、普通用户、VIP）时，展示不同的板块
 
-##3、适配器模式
+## 3、适配器模式
 
 - 项目比较老了，又需要修改。
 
@@ -350,7 +350,7 @@ remoteControl.tvProtocol = tvProtocol;
 @end
 ```
 
-##4、单例模式
+## 4、单例模式
 
 ```
 @interface Mooc : NSObject
@@ -387,7 +387,7 @@ remoteControl.tvProtocol = tvProtocol;
 @end
 ```
 
-##4、命令模式
+## 4、命令模式
 
 - 1、定义: 命令模式将请求封装成对象，从而可用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤销和恢复的操作。
 
@@ -689,7 +689,7 @@ typedef void(^CommandCompletionCallBack)(Command* cmd);
 
 @end
 ```
-##5、中介者模式（Mediator）
+## 5、中介者模式（Mediator）
 
 - 1、定义: 中介者模式就是用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
 
@@ -767,7 +767,7 @@ void mediator() {
 }
 ```
 
-##6、观察者模式（Observer）
+## 6、观察者模式（Observer）
 
 - 1、定义: 定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。
 
@@ -855,7 +855,7 @@ void mediator() {
 @end
 ```
 
-##7、备忘录模式（Memento）
+## 7、备忘录模式（Memento）
 
 - 1、定义: 在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就开奖对象恢复到原先保存的状态了。
 
@@ -953,7 +953,7 @@ void memento() {
 }
 ```
 
-##8、策略模式（Strategy）：
+## 8、策略模式（Strategy）：
 
 - 1、定义: 定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。
 
@@ -1013,7 +1013,7 @@ void memento() {
 
 @end
 ```
-##9、访问者模式（Visitor）
+## 9、访问者模式（Visitor）
 
 - 1、定义: 访问者模式封装了一些作用于某种数据结构中的各元素操作，它可以在不改变数据结构的前提下定义作用于这些元素的新的操作。
 
@@ -1121,7 +1121,7 @@ void memento() {
 
 @end
 ```
-##10、模板方法模式（TemplateMethod）
+## 10、模板方法模式（TemplateMethod）
 
 - 1、定义: 定义一个操作中的算法的框架，而降一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
 

@@ -1,4 +1,4 @@
-##1、简介
+## 1、简介
 
 - NSOperation、NSOperationQueue 是苹果提供给我们的一套多线程解决方案。实际上 NSOperation、NSOperationQueue 是基于 GCD 更高一层的封装，完全面向对象。
 
@@ -20,7 +20,7 @@
 
   - 3、控制最大并发量
 
-##2、NSOperation
+## 2、NSOperation
 
 - 操作对象（operation object）是NSOperation类的实例，你能够使用它执行应用中你想执行的任务。NSOperation是一个抽象的基类，开发中我们很少使用，一般使用它的子类`NSInvocationOpeation`和`NSBlockOperation`或者继承`NSOperation自定义子类`来执行任务。虽然是基类但是`NSOperation`实现了很多重要的逻辑来确保执行任务的安全，我们只需要专注实际的任务即可。
 

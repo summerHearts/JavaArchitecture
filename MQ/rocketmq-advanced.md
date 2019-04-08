@@ -12,7 +12,7 @@
 
 <!-- /TOC -->
 
-## 架构
+##  架构
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/rocketmq/rmq-basic-arc.png" />
@@ -20,7 +20,7 @@
 
 RocketMQ 由四部分组成：NameServer、Broker、Producer、Consumer。其中任意一个组成都可以水平扩展为集群模式，以避免单点故障问题。
 
-### NameServer
+## # NameServer
 
 NameServer 提供轻量级的服务发现和路由能力。每个 NameServer 节点记录全部的路由信息，支持相应的读写操作，并支持快速存储扩展。
 
@@ -40,7 +40,7 @@ RocketMQ 客户端（Producer/Consumer）将从 NameServer 查询队列路由信
 
 > 更详细信息可以参考官方文档：[here](http://rocketmq.apache.org/rocketmq/four-methods-to-feed-name-server-address-list/)
 
-### Broker
+## # Broker
 
 Broker 通过提供轻量级的 TOPIC 和 QUEUE 机制来处理消息存储。它们支持 Push 和 Pull 模型，包含容错机制（2 个副本或 3 个副本），并提供强大的峰值填充和以原始时间顺序累积数千亿条消息的能力。此外，Brokers 还提供灾难恢复，丰富的指标统计和警报机制。
 
@@ -56,24 +56,24 @@ Broker 有几个重要的子模块：
 <img src="https://raw.githubusercontent.com/dunwu/JavaWeb/master/images/distributed/mq/rocketmq/rmq-basic-component.png" />
 </div>
 
-### Producer
+## # Producer
 
 Producers 支持分布式部署。Distributed Producers 通过多种负载均衡模式向 Broker 集群发送消息。发送过程支持快速故障并具有低延迟。
 
-### Consumer
+## # Consumer
 
 Consumer 也支持 Push 和 Pull 模型中的分布式部署。它还支持群集消费和消息广播。它提供实时消息订阅机制，可以满足大多数消费者的需求。 RocketMQ 的网站为感兴趣的用户提供了一个简单的快速入门指南。
 
-## 关键特性以及其实现原理
+##  关键特性以及其实现原理
 
 分布式消息系统作为实现分布式系统可扩展、可伸缩性的关键组件，需要具有高吞吐量、高可用等特点。而谈到消息系统的设计，就回避不了两个问题：
 
 1.  消息的顺序问题
 2.  消息的重复问题
 
-### 顺序消息
+## # 顺序消息
 
-#### 第一种模型
+## ##  第一种模型
 
 假如生产者产生了 2 条消息：M1、M2，要保证这两条消息的顺序，应该怎样做？你脑中想到的可能是这样：
 
@@ -89,7 +89,7 @@ Consumer 也支持 Push 和 Pull 模型中的分布式部署。它还支持群�
 <img src="http://upload-images.jianshu.io/upload_images/3101171-5a6313fe906a678b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" />
 </div>
 
-#### 第二种模型
+## ##  第二种模型
 
 如何才能在 MQ 集群保证消息的顺序？一种简单的方式就是将 M1、M2 发送到同一个 Server 上：
 
@@ -163,7 +163,7 @@ private SendResult send()  {
 }
 ```
 
-### 消息重复
+## # 消息重复
 
 造成消息重复的根本原因是：网络不可达。只要通过网络交换数据，就无法避免这个问题。所以解决这个问题的办法就是绕过这个问题。那么问题就变成了：如果消费端收到两条一样的消息，应该怎样处理？
 
@@ -180,7 +180,7 @@ private SendResult send()  {
 
 **RocketMQ 不保证消息不重复，如果你的业务需要保证严格的不重复消息，需要你自己在业务端去重。**
 
-### 事务消息
+## # 事务消息
 
 RocketMQ 除了支持普通消息，顺序消息，另外还支持事务消息。
 
@@ -198,7 +198,7 @@ RocketMQ 分布式事务步骤：
 执行本地事务
 通过第 1 步骤拿到的地址去访问消息，并修改消息状态。
 
-## 资料
+##  资料
 
 - [RocketMQ 官方文档](http://rocketmq.apache.org/docs/quick-start/)
 - [分布式开放消息系统(RocketMQ)的原理与实践](https://www.jianshu.com/p/453c6e7ff81c)

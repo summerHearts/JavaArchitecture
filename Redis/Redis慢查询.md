@@ -1,4 +1,4 @@
-## Redis慢查询
+##  Redis慢查询
 - 1、什么是SlowLog
   - SlowLog是Redis用来记录慢查询执行时间的日志系统。由于SlowLog只保存在内存中，所以SlowLog的效率非常高，
 

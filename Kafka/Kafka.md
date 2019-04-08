@@ -1,4 +1,4 @@
-##Kafka
+## Kafka
 有时候，我们学习了一些东西，过了一段时间，又忘记了。只记得当时学过。那么再次回顾的时候，最好能带上几个问题，这样才能让自己记忆的更加清晰。
 
 今日我们来回顾Kafka消息中间件，那么下边是我提出的几个问题，大家看看有几个是能回答上来的。
@@ -14,12 +14,12 @@
 ![](https://www.icheesedu.com/images/qiniu/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2.png)
 
 
-##1、简介
+## 1、简介
  -  Kafka 是分布式发布-订阅消息系统。它最初由 LinkedIn 公司开发，使用 Scala语言编写,之后成为 Apache 项目的一部分。Kafka 是一个分布式的，可划分的，多订阅者,冗余备份的持久性的日志服务。它主要用于处理活跃的流式数据。
  
  -  消息队列的性能好坏，其文件存储机制设计是衡量一个消息队列服务技术水平和最关键指标之一。下面将从Kafka文件存储机制和物理结构角度，分析Kafka是如何实现高效文件存储，及实际应用效果。
 
-##2、 Kafka的特点:
+## 2、 Kafka的特点:
 
  - **高吞吐量、低延迟**：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。
  
@@ -29,7 +29,7 @@
 - **高并发**：支持数千个客户端同时读写
 
 
-##3、 Kafka的使用场景：
+## 3、 Kafka的使用场景：
 - **日志收集**：一个公司可以用Kafka可以收集各种服务的log，通过kafka以统一接口服务的方式开放给各种consumer，例如hadoop、Hbase、Solr等。
 
 - **消息系统**：解耦和生产者和消费者、缓存消息等。
@@ -39,13 +39,13 @@
 - **事件源**
 
 　　
-##4、架构
+## 4、架构
 
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_11-13-31.png)
 
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_11-13-45.png)
 
-##5、Kafka专用术语：
+## 5、Kafka专用术语：
  
 - **Broker**：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。
 
@@ -84,7 +84,7 @@
 　　 
 　　 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_15-34-57.png)
 　　 
-##6、kafka高吞吐量的因素
+## 6、kafka高吞吐量的因素
 
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_14-32-56.png)
 
@@ -98,20 +98,20 @@
    
    避免了内核态与用户态的上下文切换动作
    
-##7、日志策略- 日志保留策略   - 无论消费者是否已经消费了消息，kafka都会一直保存这些消息，但并不会像数据库那样长期保存。为了避免磁盘被占满，kafka会配置响应的保留策略（retention policy），以实现周期性地删除陈旧的消息   - kafka有两种“保留策略”：        - 1、根据消息保留的时间，当消息在kafka中保存的时间超过了指定时间，就可以被删除；       - 2、 根据topic存储的数据大小，当topic所占的日志文件大小大于一个阀值，则可以开始删除最旧的消息- 日志压缩策略   - 在很多场景中，消息的key与value的值之间的对应关系是不断变化的，就像数据库中的数据会不断被修改一样，消费者只关心key对应的最新的value。我们可以开启日志压缩功能，kafka定期将相同key的消息进行合并，只保留最新的value值 。　　 
+## 7、日志策略- 日志保留策略   - 无论消费者是否已经消费了消息，kafka都会一直保存这些消息，但并不会像数据库那样长期保存。为了避免磁盘被占满，kafka会配置响应的保留策略（retention policy），以实现周期性地删除陈旧的消息   - kafka有两种“保留策略”：        - 1、根据消息保留的时间，当消息在kafka中保存的时间超过了指定时间，就可以被删除；       - 2、 根据topic存储的数据大小，当topic所占的日志文件大小大于一个阀值，则可以开始删除最旧的消息- 日志压缩策略   - 在很多场景中，消息的key与value的值之间的对应关系是不断变化的，就像数据库中的数据会不断被修改一样，消费者只关心key对应的最新的value。我们可以开启日志压缩功能，kafka定期将相同key的消息进行合并，只保留最新的value值 。　　 
 
-##8、消息发送可靠性
+## 8、消息发送可靠性
 
  - 生产者发送消息到broker，有三种确认方式（request.required.acks）    - acks = 0: producer不会等待broker（leader）发送ack 。因为发送消息网络超时或broker crash(1.Partition的Leader还没有commit消息 2.Leader与Follower数据不同步)，既有可能丢失也可能会重发。
         - acks = 1: 当leader接收到消息之后发送ack，丢会重发，丢的概率很小    - acks = -1: 当所有的follower都同步消息成功后发送ack.  丢失消息可能性比较低。
-    ##9、消息存储可靠性   - 每一条消息被发送到broker中，会根据partition规则选择被存储到哪一个partition。如果partition规则设置的合理，所有消息可以均匀分布到不同的partition里，这样就实现了水平扩展。
+    ## 9、消息存储可靠性   - 每一条消息被发送到broker中，会根据partition规则选择被存储到哪一个partition。如果partition规则设置的合理，所有消息可以均匀分布到不同的partition里，这样就实现了水平扩展。
       - 在创建topic时可以指定这个topic对应的partition的数量。在发送一条消息时，可以指定这条消息的key，producer根据这个key和partition机制来判断这个消息发送到哪个partition。   - kafka的高可靠性的保障来自于另一个叫副本（replication）策略，通过设置副本的相关参数，可以使kafka在性能和可靠性之间做不同的切换。两两之间相互备份。
    
       ```
       sh kafka-topics.sh --create --zookeeper 192.168.11.140:2181 --replication-factor 2 --partitions 3 --topic sixsix      --replication-factor表示的副本数
       ```
       
-##10、副本机制
+## 10、副本机制
 
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-190_14-59-50.png)
 
@@ -126,7 +126,7 @@
 
 
 
-##11、查看kafka数据文件内容- 在使用kafka的过程中有时候需要我们查看产生的消息的信息，这些都被记录在kafka的log文件中。由于log文件的特殊格式，需要通过kafka提供的工具来查看
+## 11、查看kafka数据文件内容- 在使用kafka的过程中有时候需要我们查看产生的消息的信息，这些都被记录在kafka的log文件中。由于log文件的特殊格式，需要通过kafka提供的工具来查看
 
  ``` ./bin/kafka-run-class.sh kafka.tools.DumpLogSegments --files /tmp/kafka-logs/*/000**.log  --print-data-log {查看消息内容}
  ```

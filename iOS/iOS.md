@@ -1,5 +1,5 @@
 iOS
-##1、分类Category和扩展Extension有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？
+## 1、分类Category和扩展Extension有什么区别？可以分别用来做什么？分类有哪些局限性？分类的结构体里面有哪些成员？
 
 - 1、属性、方法增加：
 
@@ -37,7 +37,7 @@ iOS
   
 
 
-##2、讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？
+## 2、讲一下atomic的实现机制；为什么不能保证绝对的线程安全（最好可以结合场景来说）？
 
 ```
 id objc_getProperty(id self, SEL _cmd, ptrdiff_t offset, BOOL atomic) {
@@ -108,7 +108,7 @@ static inline void reallySetProperty(id self, SEL _cmd, id newValue, ptrdiff_t o
 不过atomic可并不能保证线程安全。如果线程 A 调了 getter，与此同时线程 B 、线程 C 都调了 setter——那最后线程 A get 到的值，3种都有可能：可能是 B、C set 之前原始的值，也可能是 B set 的值，也可能是 C set 的值。同时，最终这个属性的值，可能是 B set 的值，也有可能是 C set 的值。
 
 
-##3、被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？
+## 3、被weak修饰的对象在被释放的时候会发生什么？是如何实现的？知道sideTable么？里面的结构可以画出来么？
 - 被weak修饰的对象在被释放时候会置为nil，不同于assign； 
 - Runtime维护了一个weak表，用于存储指向某个对象的所有weak指针。weak表其实是一个hash（哈希）表，Key是所指对象的地址，Value是weak指针的地址（这个地址的值是所指对象指针的地址）数组。 
 	- 1、初始化时：runtime会调用objc_initWeak函数，初始化一个新的weak指针指向对象的地址。 
@@ -281,7 +281,7 @@ struct weak_table_t {
 弱引用的初始化，从上文的分析中可以看出，主要的操作部分就在弱引用表的取键、查询散列、创建弱引用表等操作，可以总结出如下的流程图
 这个图中省略了很多情况的判断，但是当声明一个 __weak 会调用上图中的这些方法。当然， storeWeak 方法不仅仅用在 __weak 的声明中，在 class 内部的操作中也会常常通过该方法来对 weak 对象进行操作。
 
-##4、关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？
+## 4、关联对象有什么应用，系统如何管理关联对象？其被释放的时候需要手动将所有的关联对象的指针置空么？
 - 可以不改变源码的情况下增加实例变量。 
 - 可与分类配合使用，为分类增加属性。（类别是不能添加成员变量的（property本质也是成员变量 = var + setter、getter），原因是因为一个类的内存大小是固定的，一个雷在load方法执行前就已经加载在内存之中，大小已固定） 
 在关联中最主要的一个类就是 AssociationsManager
@@ -337,7 +337,7 @@ void *objc_destructInstance(id obj) {
 }
 ```
 
-##5、KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？
+## 5、KVO的底层实现？如何取消系统默认的KVO并手动触发（给KVO的触发设定条件：改变的值符合某个条件时再触发KVO）？
 - 当观察某对象 A 时，KVO 机制动态创建一个对象A当前类的子类，并为这个新的子类重写了被观察属性 keyPath 的 setter 方法。setter 方法随后负责通知观察对象属性的改变状况。 
 - Apple 使用了 isa 混写（isa-swizzling）来实现 KVO 。当观察对象A时，KVO机制动态创建一个新的名为：NSKVONotifying_A 的新类，该类继承自对象A的本类，且 KVO 为 NSKVONotifying_A 重写观察属性的 setter 方法，setter 方法会负责在调用原 setter 方法之前和之后，通知所有观察对象属性值的更改情况。 
 修改：使用方法,可实现取消系统kvo，自己触发，也就可控。
@@ -362,11 +362,11 @@ void *objc_destructInstance(id obj) {
 }
 ```
 
-##6、class_ro_t 和 class_rw_t 的区别？
+## 6、class_ro_t 和 class_rw_t 的区别？
 - ObjC 类中的属性、方法还有遵循的协议等信息都保存在 class_rw_t 中： 
 - 其中还有一个指向常量的指针 ro，其中存储了当前类在编译期就已经确定的属性、方法以及遵循的协议。
 
-##7、iOS 中内省的几个方法？class方法和objc_getClass方法有什么区别?
+## 7、iOS 中内省的几个方法？class方法和objc_getClass方法有什么区别?
 - 	内省方法
 	- 判断对象类型:
    	- 1、-(BOOL) isKindOfClass: 判断是否是这个类或者这个类的子类的实例
@@ -377,11 +377,11 @@ void *objc_destructInstance(id obj) {
 	- object_getClass:获得的是isa的指向
 	- self.class:当self是实例对象的时候，返回的是类对象，否则则返回自身。
 	- 类方法class，返回的是self，所以当查找meta class时，需要对类对象调用object_getClass方法
-##8、一个int变量被__block修饰与否的区别？
+## 8、一个int变量被__block修饰与否的区别？
 - 没有修饰，被block捕获，是值拷贝。 - 使用__block修饰,会生成一个结构体，复制int的引用地址。达到修改数据。
 	[iOS Block 详解](https://juejin.im/entry/588075132f301e00697f18e0)
 
-##9、哪些场景可以触发离屏渲染？
+## 9、哪些场景可以触发离屏渲染？
 
 - 设置了以下属性时，都会触发离屏绘制：
   - shouldRasterize（光栅化）
@@ -393,11 +393,11 @@ void *objc_destructInstance(id obj) {
   - 渐变
 
   
-##10、App 启动优化策略？最好结合启动流程来说
+## 10、App 启动优化策略？最好结合启动流程来说
 [App 启动优化策略](https://mp.weixin.qq.com/s/Kf3EbDIUuf0aWVT-UCEmbA)
 
 
-##11、App 无痕埋点的思路了解么？你认为理想的无痕埋点系统应该具备哪些特点？
+## 11、App 无痕埋点的思路了解么？你认为理想的无痕埋点系统应该具备哪些特点？
 
 ```
 #import <Foundation/Foundation.h>
@@ -506,7 +506,7 @@ static dispatch_once_t onceToken;
 @end
 ```
 
-##12、你知道有哪些情况会导致app崩溃，分别可以用什么方法拦截并化解？
+## 12、你知道有哪些情况会导致app崩溃，分别可以用什么方法拦截并化解？
 
 [NSObjectSafe](https://github.com/jasenhuang/NSObjectSafe/blob/master/NSObjectSafe/NSObjectSafe.m)
 
@@ -519,7 +519,7 @@ static dispatch_once_t onceToken;
 	- 先解释一下什么是SIGPIPE异常，通俗一点的描述是这样的：对一个端已经关闭的socket调用两次write，第二次write将会产生SIGPIPE信号，该信号默认结束进程。 
 	- SIGABRT 异常 这是一个让程序终止的标识，会在断言、app内部、操作系统用终止方法抛出。通常发生在异步执行系统方法的时候。如CoreData、NSUserDefaults等，还有一些其他的系统多线程操作。 注意：这并不一定意味着是系统代码存在bug，代码仅仅是成了无效状态，或者异常状态。 
 
-##13、App 网络层有哪些优化策略？
+## 13、App 网络层有哪些优化策略？
 - 1、优化DNS解析和缓存
 - 2、网络质量检测（根据网络质量来改变策略）
 - 3、提供网络服务优先级和依赖机制
@@ -532,7 +532,7 @@ static dispatch_once_t onceToken;
 - 每个网络绑定到vc，vc销毁，网络请求销毁。
 - 数据请求优先级高于图片请求。网络层做区分。
 
-##14、TCP为什么要三次握手，四次挥手
+## 14、TCP为什么要三次握手，四次挥手
 
 [TCP的三次握手与四次挥手（详解+动图)](https://blog.csdn.net/qzcsu/article/details/72861891?utm_source=blogxgwz2)
 

@@ -1,4 +1,4 @@
-##1、什么是JVM
+## 1、什么是JVM
 
 ```
 Classfile /Users/Kenvin/Downloads/JavaInterview-master/JavaInterview/target/classes/com/kxw/jvm/ClassStructure.class
@@ -335,18 +335,18 @@ finally关键字的实现使用：jsr,jsr_w,ret
 
 
 
-##2、运行时数据区
+## 2、运行时数据区
 
 ![](https://www.icheesedu.com/images/qiniu/JAVA%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E5%88%86%E5%B8%83%E5%9B%BE.png)
 
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-149_20-13-57.png)
 
 
-##3、内存模型
+## 3、内存模型
 
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-05-149_20-18-29.png)
 
-##4、 垃圾收集器
+## 4、 垃圾收集器
 
 
 

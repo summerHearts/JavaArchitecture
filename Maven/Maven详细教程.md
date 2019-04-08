@@ -1,4 +1,4 @@
-##Maven详细教程
+## Maven详细教程
 
 - 环境搭建
   - 1、http://maven.apache.org/download.cgi 
@@ -47,7 +47,7 @@
         </mirrors>
         ```
 
-##2、配置IDEA 主题
+## 2、配置IDEA 主题
 
 - 建议在设置里的Plugins中下载一个插件主题  **Material Theme UI**
  
@@ -58,7 +58,7 @@
  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-06_21-30-13.png)
 
 
-##3、Nexus搭建Maven私服
+## 3、Nexus搭建Maven私服
 - 在开发过程中，有时候会使用到公司内部的一些开发包，显然把这些包放在外部是不合适的。另外，由于项目一直在开发中，这些内部的依赖可能也在不断的更新。可以通过搭建公司内部的Maven服务器，将第三方和内部的依赖统一管理，同时也可以节省网络带宽，当然前提是项目所需要的构件在私服中已经存在
 
   
@@ -152,7 +152,7 @@
  
    
 
-##4、MAVEN Scope使用
+## 4、MAVEN Scope使用
 
 在Maven的依赖管理中，经常会用到依赖的scope设置。这里整理下各种scope的使用场景和说明，以及在使用中的实践心得。
  
@@ -177,7 +177,7 @@
 provided是没有传递性的，也就是说，如果你依赖的某个jar包，它的某个jar的范围是provided，那么该jar不会在你的工程中依靠jar依赖传递加入到你的工程中。
 provided具有继承性，上面的情况，如果需要统一配置一个组织的通用的provided依赖，可以使用parent，然后在所有工程中继承。
 
-##5、通过mvn dependency:tree 查看依赖树,解决依赖jar冲突问题
+## 5、通过mvn dependency:tree 查看依赖树,解决依赖jar冲突问题
 
 ```
 mvn dependency:tree 

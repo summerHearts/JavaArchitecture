@@ -1,4 +1,4 @@
-##Spring事务管理
+## Spring事务管理
 - Spring - 在同一个类中一个普通方法调用另一个有@Transcational注解的方法时，Spring事务管理还启作用吗？
 
  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-08-22_21-17-41.png)
@@ -45,7 +45,7 @@
 - 其实，如果用SQL直接写就是 “开始事务"--->“处理数据”--->“提交/回滚“这3步，简单直接。至少我暂时没看出来搞出很多@Transactional+传播属性有任何可以简化设计，提高代码可维护性上的好处。
 - 所以对于简单事务，不妨统一做一层Service，在入口加@Transactional，然后把数据源（或者等价的jdbcTemplate/mapper）往下层传。而下层就不需要考虑事务这件事了。
  
-##2、推荐阅读
+## 2、推荐阅读
 - Spring事务处理 https://www.cnblogs.com/mxmbk/p/5341258.html
 - spring事务使用心得 https://www.cnblogs.com/zhuanghuang/p/5515830.html
 - Spring事务管理的一些注意点 https://blog.csdn.net/liujinye/article/details/78286721

@@ -1,10 +1,10 @@
 # Class文件结构
 
-## 语言无关性
+##  语言无关性
 
 jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby, groovy等）编译而来，所以jvm可以说是语言无关性的。
 
-## 文件结构
+##  文件结构
 
 ![jvm-文件结构字段](E:\OneDriver\OneDrive\Pictures\java\jvm-文件结构字段.png)
 
@@ -14,7 +14,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 魔数
+## ##  魔数
 
 - magic u4
 
@@ -24,7 +24,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 版本
+## ##  版本
 
 ![jvm-版本](E:\OneDriver\OneDrive\Pictures\java\jvm-版本.png)
 
@@ -34,7 +34,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 常量池
+## ##  常量池
 
 ![JVM-文件结构常量池说明](E:\OneDriver\OneDrive\Pictures\java\JVM-文件结构常量池说明.png)
 
@@ -42,7 +42,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 访问符
+## ##  访问符
 
 ![JVM-访问标识符](E:\OneDriver\OneDrive\Pictures\java\JVM-访问标识符.png)
 
@@ -50,7 +50,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 类、超类、接口
+## ##  类、超类、接口
 
 - this_class u2
 - super_class u2
@@ -58,7 +58,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 - interfaces
   - 
 
-#### 字段
+## ##  字段
 
 - field_count
 - fields
@@ -74,7 +74,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 方法
+## ##  方法
 
 - methods_count
   - 方法数量
@@ -88,7 +88,7 @@ jvm运行的是 `.class文件` ，class文件可以从多种高级语言（ruby,
 
 
 
-#### 属性
+## ##  属性
 
 
 

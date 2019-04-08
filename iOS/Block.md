@@ -1,4 +1,4 @@
-##1、Block相关面试题
+## 1、Block相关面试题
 
 - 1、block的原理是怎样的？本质是什么？
 
@@ -6,7 +6,7 @@
 - 3、block的属性修饰词为什么是copy？使用block有哪些使用注意？
 - 4、block在修改NSMutableArray，需不需要添加__block？
 
-##2、对Block有一个基本的认识
+## 2、对Block有一个基本的认识
 
 - block本质上也是一个oc对象，他内部也有一个isa指针。block是封装了函数调用以及执行上下文的对象。
 
@@ -180,7 +180,7 @@ int main(int argc, const char * argv[]) {
 
 ![](https://upload-images.jianshu.io/upload_images/1434508-b6f59468ae71b22b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
-##3、`Block的变量捕获`
+## 3、`Block的变量捕获`
 
 为了保证block内部能够正常访问外部的变量，block有一个变量捕获机制。
 
@@ -599,7 +599,7 @@ ARC下block属性的建议写法
 - `@property (copy, nonatomic) void (^block)(void);`
 
 
-##4、 探寻block的本质
+## 4、 探寻block的本质
 
 `block对对象变量的捕获`
 
@@ -734,7 +734,7 @@ copy和dispose函数中传入的都是__main_block_impl_0结构体本身。
 
 
 
-##5、问题
+## 5、问题
 
 - 1、下列代码person在何时销毁 ？
 
@@ -982,7 +982,7 @@ age中存储这修改后的变量20。
 
 通过上图的计算可以发现打印age的地址同__Block_byref_age_0结构体内age值的地址相同。也就是说外面使用的age，代表的就是结构体内的age值。所以直接拿来用的age就是之前声明的int age。
 
-##6、__block内存管理
+## 6、__block内存管理
 
 
 上文提到当block中捕获对象类型的变量时，block中的__main_block_desc_0结构体内部会自动添加copy和dispose函数对捕获的变量进行内存管理。
@@ -1303,7 +1303,7 @@ block的copy[50480:8737001] 0x100669a50
 ```
 当block从堆中移除的时候。会调用dispose函数，block块中去除对__Block_byref_person_0 *person;的引用，__Block_byref_person_0结构体中也会调用dispose操作去除对Person *person;的引用。以保证结构体和结构体内部的对象可以正常释放。
 
-##7、循环引用
+## 7、循环引用
 
 ```
 int main(int argc, const char * argv[]) {

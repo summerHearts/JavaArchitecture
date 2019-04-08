@@ -1,4 +1,4 @@
-##1、内存布局
+## 1、内存布局
 
 ![](https://www.icheesedu.com/images/内存分布.png)
 
@@ -36,7 +36,7 @@
   - 堆：是由new分配的内存，一般速度比较慢，而且容易产生内存碎片,不过用起来最方便.
 
 
-##2、内存管理方案
+## 2、内存管理方案
 
 - 1、`TaggedPointer`:小对象，比如NSNumber
 
@@ -64,7 +64,7 @@
    ![](https://www.icheesedu.com/images/sidetable.png)
    
 
-##3、数据结构
+## 3、数据结构
 
  
 对于Spinlock_t自旋锁，其本质是一种“忙等”的锁，所谓“忙等”就是当一条线程被加上Spinlock自旋锁后，当线程执行时，会不断的去获取这个锁的信息，一旦获取到这个锁，便进行线程的执行。这对于一般的高性能锁比如信号量不同，信号量是当线程获取到信号量小于等0时，便自动进行休眠，当信号量发出时，对线程进行唤醒操作，这样就致使了两种锁的性质不同。Spinlock自旋锁只适用于一些小型数据操作，耗时很少的线程操作。
@@ -80,7 +80,7 @@
  ![](https://www.icheesedu.com/images/weak_table_t.png)
 
 
-##4、ARC & MRC
+## 4、ARC & MRC
 
 ![](https://www.icheesedu.com/images/mrc.png)
 
@@ -91,7 +91,7 @@
 
 - **ARC**:就是现代程序员常用的对象引用计数管理方式，ARC是由编译器和runtime协作，共同完成对对象引用计数的控制，而不需要程序员自己手动控制。ARC中**禁止手动调用**`retain/realse/retainCount/dealloc`。相比起MRC，在ARC中新增了weak和strong等属性关键字。
 
-##5、引用计数
+## 5、引用计数
 
 - `alloc`：这个方法实质上是经过了一系列调用,最终调用了C函数的calloc，需要注意的是调用该方法时，对象的引用计数并没有+1.
 
@@ -328,7 +328,7 @@ weak_clear_no_lock(weak_table_t *weak_table, id referent_id)
 
 - `dealloc`：对象在被回收时，就会调用dealloc方法，其内部实现流程首先要调用一个_objc_rootDealloc()方法，再方法内部再调用一个rootDealloc()方法，此时在rootDealloc中会判断该对象的isa指针，依次判断指针内的内容：nonpointer_isa，weakly_referenced,has_assoc,has_cxx_dtor,has_sidetable_rc，如果判断结果为：该isa指针不是非指针型的isa指针，没有弱引用的指针指向，没有相应的关联对象，没有c++相关的内容，没有使用ARC模式，没有关联到散列表中，即判断的内容都为否，则可以直接调用c语言中的free()函数进行相应的内存释放，否则就会调用objc_dispose()这个函数。
 
-##6、弱引用
+## 6、弱引用
 
 当我们创建一个弱引用变量weakPointer的时候在编译器中可以这么写
 
@@ -539,7 +539,7 @@ weak_entry_for_referent(weak_table_t *weak_table, objc_object *referent)
 关于如何清除弱引用指针的，Dealloc方法调用过程已经说的很明白了，过程也与上面一行说的类似，就是在最后调用sidetable_clearDeallocating()方法中将对象对应的弱引用列表找到，将所有弱引用指针置为nil的时候就把相应的弱引用指针擦除了，这样说就一目了然了。
 
 
-##7、自动释放池
+## 7、自动释放池
 
 因为现在大家都在使用ARC模式下进行编程，一个很重要的问题也是最容易被大家所忽视的问题就是自动释放池，大部分程序员尤其是刚入行的都只是知道有这么一个东西，但具体是什么，工作的原理是什么，在什么时候使用它都一概不知。所以写一篇文章，记录一下个人对自动释放池的一些理解。
 
@@ -609,7 +609,7 @@ autoreleasepool是以栈为节点，通过双向链表的形式组合而成的�
 - 而在我们开发的过程中，通过for循环加载一些占用内存较大的对象时可以嵌套使用autoreleasepool，在这些对象使用完毕的时候及时被释放掉，这样就不会造成内存过大或过多浪费的情况啦~
 
 
-##8、循环引用
+## 8、循环引用
 
 - 循环引用分三种：
    - 1.自循环引用

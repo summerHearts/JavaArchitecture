@@ -1,8 +1,8 @@
-##索引
+## 索引
 
 ![](https://upload-images.jianshu.io/upload_images/325120-768def12a042a22e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-##为什么用索引
+## 为什么用索引
 
 索引能极大的减少存储引擎需要扫描的数据量。
 
@@ -10,7 +10,7 @@
 
 索引可以帮助我们在进行分组、排序等操作的时候，避免使用临时表。
 
-##二叉树
+## 二叉树
 
 [二叉查找树](https://www.cs.usfca.edu/~galles/visualization/BST.html)
 
@@ -20,7 +20,7 @@
 
 [B+Tree](https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html)
 
-##B-Tree
+## B-Tree
 B-Tree是为磁盘等外存储设备设计的一种平衡查找树。因此在讲B-Tree之前先了解下磁盘的相关知识。
 
 
@@ -71,7 +71,7 @@ B-Tree中的每个节点根据实际情况可以包含大量的关键字信息�
 分析上面过程，发现需要3次磁盘I/O操作，和3次内存查找操作。由于内存中的关键字是一个有序表结构，可以利用二分法查找提高效率。而3次磁盘I/O操作是影响整个B-Tree查找效率的决定因素。B-Tree相对于AVLTree缩减了节点个数，使每次磁盘I/O取到内存的数据都发挥了作用，从而提高了查询效率。
 
 
-##B+Tree
+## B+Tree
 
 B+Tree是在B-Tree基础上的一种优化，使其更适合实现外存储索引结构，InnoDB存储引擎就是用B+Tree实现其索引结构。
 

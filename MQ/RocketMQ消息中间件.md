@@ -1,4 +1,4 @@
-##RocketMQ消息中间件
+## RocketMQ消息中间件
 
 Apache RocketMQ是一款具有低延迟，高性能和可靠性，数十亿容量和灵活可扩展性的分布式消息传递和流媒体平台。它由四部分组成：Name Servers，brokers，producers和consumers。 它们中的每一个都可以在没有单点故障的情况下进行水平扩展。
 

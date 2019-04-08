@@ -1,4 +1,4 @@
-##1、基础概念简介
+## 1、基础概念简介
 - 1、AOP（Aspect Oriented Programming），即面向切面编程，可以说是OOP（Object Oriented Programming，面向对象编程）的补充和完善。另外还有面向过程编程如C，函数式编程，事件驱动编程等等。
 - 2、AOP是一种编程范式，不是编程语言。解决了特定问题，不能解决所有问题。是OOP的补充，不是替代。
 - 3、AOP的初衷：
@@ -79,7 +79,7 @@
 
      
      
-##2、彻底理解 aspect, join point, point cut, advice
+## 2、彻底理解 aspect, join point, point cut, advice
 
 ```
 看完了上面的理论部分知识, 我相信还是会有不少朋友感觉到 AOP 的概念还是很模糊, 对 AOP 中的各种概念理解的还不是很透彻. 其实这很正常, 因为 AOP 中的概念是在是太多了, 我当时也是花了老大劲才梳理清楚的.
@@ -106,7 +106,7 @@ advice --> 抓过来审问, advice 是一个动作, 即一段 Java 代码, 这�
 aspect: aspect 是 point cut 与 advice 的组合, 因此在这里我们就可以类比: "根据老王的线索, 凡是发现有身高七尺五寸的男性, 都要抓过来审问" 这一整个动作可以被认为是一个 aspect.
 ```
      
-##3、AOP使用
+## 3、AOP使用
 
 案例背景:
 
@@ -258,7 +258,7 @@ public class PkgTypeAspectConfig {
     @Before("matchType()")
     public void before(){
         System.out.println("");
-        System.out.println("###before");
+        System.out.println("## #before");
     }
 
     //匹配ProductService类里的所有方法
@@ -268,7 +268,7 @@ public class PkgTypeAspectConfig {
     @Before("matchTypes()")
     public void befores(){
         System.out.println("");
-        System.out.println("###before");
+        System.out.println("## #before");
     }
 }
  ```
@@ -306,7 +306,7 @@ public class PkgTypeAspectConfig {
     @Before("matchCondition()")
     public void before(){
         System.out.println("");
-        System.out.println("###before");
+        System.out.println("## #before");
 }
  ```
  
@@ -323,7 +323,7 @@ public class PkgTypeAspectConfig {
      @Before("matchCondition()")
      public void before(){
          System.out.println("");
-         System.out.println("###before");
+         System.out.println("## #before");
      }
  }
  ```

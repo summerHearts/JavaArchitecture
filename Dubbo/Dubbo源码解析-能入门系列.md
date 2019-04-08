@@ -1,4 +1,4 @@
-##1、ZooKeeper 可视化工具 zkui
+## 1、ZooKeeper 可视化工具 zkui
 - 1、简介zkui它提供了一个管理界面，可以针对zookeepr的节点值进行CRUD操作，同时也提供了安全认证。
 
 - 2、下载安装
@@ -55,7 +55,7 @@
         Refer dubbo service com.of.wangpu.api.service.HelloService from url zookeeper://127.0.0.1:2181/com.alibaba.dubbo.registry.RegistryService?anyhost=true&application=dubbo-provider&check=false&connected=true&dubbo=2.4.10&inside.invoker.count=1&inside.invokers=dubbo%3A%2F%2F192.168.103.40%3A20880%2Fcom.of.wangpu.api.service.HelloService%3Fanyhost%3Dtrue%26application%3Ddubbo-provider%26dubbo%3D2.4.10%26interface%3Dcom.of.wangpu.api.service.HelloService%26methods%3DsayHello%26pid%3D2054%26side%3Dprovider%26timestamp%3D1535511638784&interface=com.of.wangpu.api.service.HelloService&methods=sayHello&owner=dubbo-provider&pid=2077&side=consumer&timestamp=1535511731989, dubbo version: 2.4.10, current host: 192.168.103.40
         ```
 
-##2、Dubbo相关知识点总结    
+## 2、Dubbo相关知识点总结    
 ![](http://ovsiiuil2.bkt.clouddn.com/architecture.png)
 
 - 服务容器Container负责启动，加载，运行服务提供者。
@@ -101,7 +101,7 @@
   -  ConstantHash LoadBalance: 一致性Hash策略，使相同参数请求总是发到同一提供者，一台机器宕机，可以基于虚拟节点，分摊至其他提供者，避免引起提供者的剧烈变动；
 
 
-##3、SPI设计目标
+## 3、SPI设计目标
 
 - 面向对象的设计里，模块之间是基于接口编程，模块之间不对实现类进行硬编码。一旦代码里涉及具体实现类，就违法了可拔插的原则。如果需要替换一种实现，就需要修改源码。
 
@@ -120,7 +120,7 @@
     - 每个spi文件里面的格式定义为： 扩展名=具体的类名，例如 dubbo=com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtoco
 
 
-##4、dubbo自己的SPI实现
+## 4、dubbo自己的SPI实现
 - 1、为该接口 new 一个 ExtensionLoader,然后缓存起来。
   ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-08-29_14-20-50.png)
 
@@ -185,7 +185,7 @@ objectFactory作用，为dubbo的IOC提供所有对象。
 ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-08-29_14-57-10.png)
 
 
-##5、SPI机制的adpative原理 getAdaptiveExtension
+## 5、SPI机制的adpative原理 getAdaptiveExtension
 
 ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-08-29_15-24-57.png)
 
@@ -351,7 +351,7 @@ injectExtension((T) getAdaptiveExtensionClass().newInstance());
 
   - 进入IOC反转控制机制判断接口代理类中是否有需要注入的属性。
 
-##6、dubbo自己的IOC和AOP原理
+## 6、dubbo自己的IOC和AOP原理
 getExtension(String name)
 
 ```
@@ -368,7 +368,7 @@ getExtension(String name) //指定对象缓存在cachedInstances；get出来的�
     -->injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance))//AOP的简单设计
 ```
 
-##7、dubbo的动态编译
+## 7、dubbo的动态编译
 
 上文我们讲到编译类，那么Dubbo是怎么实现的呢
 
