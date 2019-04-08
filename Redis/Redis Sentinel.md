@@ -1,4 +1,4 @@
-##1、Redis Sentinel简介
+## 1、Redis Sentinel简介
 
 - Redis 的 Sentinel 系统用于管理多个 Redis 服务器（instance）， 该系统执行以下三个任务： 
    -  监控（Monitoring）： Sentinel 会不断地检查你的主服务器和从服务器是否运作正常。
@@ -11,11 +11,11 @@
 
   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_13-38-55.png)
   
-##2、Redis Sentinel故障转移
+## 2、Redis Sentinel故障转移
      
 ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_13-41-21.png)
        
-##3、实践
+## 3、实践
 
  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-184_13-58-23.png)
       

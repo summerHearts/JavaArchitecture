@@ -1,4 +1,4 @@
-##Redis持久化的取舍和选择
+## Redis持久化的取舍和选择
 
 - Redis是一种高级key-value数据库。它跟memcached类似，不仅数据可以持久化，而且支持的数据类型很丰富。有字符串，链表，集 合和有序集合。支持在服务器端计算集合的并，交和补集(difference)等，还支持多种排序功能。所以Redis也可以被看成是一个数据结构服务器。
 
@@ -17,7 +17,7 @@
     ![](https://www.icheesedu.com/images/qiniu/388326-20170726161604968-371688235.png)
 
 
-## 2、RDB
+##  2、RDB
 
    - RDB 是 Redis 默认的持久化方案。在指定的时间间隔内，执行指定次数的写操作，则会将内存中的数据写入到磁盘中。即在指定目录下生成一个dump.rdb文件。Redis 重启会通过加载dump.rdb文件恢复数据。
    - 触发机制
@@ -41,7 +41,7 @@
          - 3、shutdown
        这三种方式都将触发RDB持久化方式。
        
-##2.1 从配置文件了解RDB
+## 2.1 从配置文件了解RDB
  - 2.1、打开 redis.conf 文件，找到 SNAPSHOTTING 对应内容
    -  1、 RDB核心规则配置（重点）
      
@@ -156,14 +156,14 @@ cp: overwrite `dump.rdb'? y
   - FLUSHALL 清空整个 Redis 服务器的数据(几乎不用)
   - SHUTDOWN 关机走人（很少用）
 
-##2.2 RDB 总结
+## 2.2 RDB 总结
   - 1、RDB是Redis内存到硬盘的快照，用于持久化。
   - 2、save通常会阻塞redis。
   - 3、bgsave不会阻塞redis,但是会fork新进程。
   - 4、save自动配置满足任意一就会被执行。
   - 5、有些触发机制不容忽视。
 
-##3、AOF 
+## 3、AOF 
 - RDB 现存的问题
    - 1、耗时，耗性能。
    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-183_17-11-16.png)
@@ -184,7 +184,7 @@ cp: overwrite `dump.rdb'? y
  
  always的速度慢,everysec和no都很快,默认值:everysec
  
-##3.1  为什么要有AOF重写策略
+## 3.1  为什么要有AOF重写策略
  
    - AOF 持久化是通过保存被执行的写命令来记录数据库状态的，所以AOF文件的大小随着时间的流逝一定会越来越大；影响包括但不限于：对于Redis服务器，计算机的存储压力；AOF还原出数据库状态的时间增加；
   - 为了解决AOF文件体积膨胀的问题，Redis提供了AOF重写功能：Redis服务器可以创建一个新的AOF文件来替代现有的AOF文件，新旧两个文件所保存的数据库状态是相同的，但是新的AOF文件不会包含任何浪费空间的冗余命令，通常体积会较旧AOF文件小很多。
@@ -193,7 +193,7 @@ cp: overwrite `dump.rdb'? y
      - 1、减少磁盘占用量
      - 2、加速恢复速度
 
-##3.2 AOF重写实现的两种方式
+## 3.2 AOF重写实现的两种方式
 - 1、bgrewriteaof
      - Redis Bgrewriteaof 命令用于异步执行一个 AOF（AppendOnly File） 文件重写操作。重写会创建一个当前 AOF 文件的体积优化版本
      
@@ -231,7 +231,7 @@ cp: overwrite `dump.rdb'? y
      appendfilename "appendonly.aof"
      ```
 
-##3.3 实战操作
+## 3.3 实战操作
 
 ```
 [root@ikenvin bin]# vim appendonly.aof
@@ -279,7 +279,7 @@ Successfully truncated AOF
 
 补充点：aof 的校验是通过 redis-check-aof 文件，那么rdb 的校验是不是可以通过 redis-check-rdb 文件呢
 
-##4、总结
+## 4、总结
 
 - Redis 默认开启RDB持久化方式，在指定的时间间隔内，执行指定次数的写操作，则将内存中的数据写入到磁盘中。
 - RDB 持久化适合大规模的数据恢复但它的数据一致性和完整性较差。

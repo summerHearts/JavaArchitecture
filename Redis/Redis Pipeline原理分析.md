@@ -1,4 +1,4 @@
-##Redis Pipeline原理分析
+## Redis Pipeline原理分析
 - **为什么会出现Pipeline**
   - Redis本身是基于Request/Response协议的，正常情况下，客户端发送一个命令，等待Redis应答，Redis在接收到命令，处理后应答。在这种情况下，如果同时需要执行大量的命令，那就是等待上一条命令应答后再执行，这中间不仅仅多了RTT（Round Time Trip），而且还频繁的调用系统IO，发送网络请求。如下图。
 
