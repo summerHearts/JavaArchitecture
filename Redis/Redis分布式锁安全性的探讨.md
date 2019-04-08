@@ -24,7 +24,7 @@
        
      最后，当客户端完成了对共享资源的操作之后，执行下面的Redis Lua脚本来释放锁：
   
-       ![](http://ovsiiuil2.bkt.clouddn.com/Xnip2018-07-187_15-18-08.png)
+  ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-187_15-18-08.png)
 
      这段Lua脚本在执行的时候要把前面的my_random_value作为ARGV[1]的值传进去，把resource_name作为KEYS[1]的值传进去。主要是为了保证操作的原子性。
  
