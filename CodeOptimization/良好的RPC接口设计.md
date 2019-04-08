@@ -97,13 +97,13 @@
 
       - 初始方案
 
-         ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-25-15.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-25-15.png)
          
         我们假设模块 A 存在上述的 ModuleAProvider 接口，ModuleAProvider 的实现中或多或少都会出现异常，例如可能存在的异常 ModuleAException，调用者实际上并不知道 ModuleAException 的存在，只有当出现异常时，才会知晓。对于 ModuleAException 这种业务异常，我们更希望调用方能够显示的处理，所以 ModuleAException 应该被设计成 Checked Excepition。
     
       - 正确的异常设计姿势
 
-      ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-26-22.png)
+   ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-26-22.png)
 
       上述接口中定义的异常实际上也是一种契约，契约的好处便是不需要叙述，调用方自然会想到要去处理 Checked Exception，否则连编译都过不了
 
@@ -111,7 +111,7 @@
 
         在 ModuleB 中，应当如下处理异常：
          
-       ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-27-22.png)
+    ![](https://www.icheesedu.com/images/qiniu/Xnip2018-07-208_09-27-22.png)
          
          someOp 演示了一个异常流的传递，ModuleB 暴露出去的异常应当是 ModuleB 的 api 模块中异常类，虽然其依赖了 ModuleA ，但需要将异常进行转换，或者对于那些意料之中的业务异常可以像 anotherOp() 一样进行处理，不再传递。这时如果新增 ModuleC 依赖 ModuleB，那么 ModuleC 完全不需要关心 ModuleA 的异常。
 
