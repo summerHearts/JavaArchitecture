@@ -94,7 +94,7 @@ javap -v  SynchronizedDemo.class
 
 - Lock Record是线程私有的数据结构，每一个线程都有一个可用Lock Record列表，同时还有一个全局的可用列表。每一个被锁住的对象Mark Word都会和一个Lock Record关联（对象头的MarkWord中的Lock Word指向Lock Record的起始地址），同时Lock Record中有一个Owner字段存放拥有该锁的线程的唯一标识（或者object mark word），表示该锁被这个线程占用。如下图所示为Lock Record的内部结构：
 
-  ![](https://www.icheesedu.com/images/qiniu/Monitor%20Record.png)
+![image.png](https://upload-images.jianshu.io/upload_images/325120-2793fcf6e20e9686.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
   
    - Lock Record 描述 Owner 初始时为NULL表示当前没有任何线程拥有该monitor record，当线程成功拥有该锁后保存线程唯一标识，当锁被释放时又设置为NULL；
    
