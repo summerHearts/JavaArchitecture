@@ -1,7 +1,6 @@
 ## 1、ThreadLocal是什么
 ThreadLocal是一个本地线程副本变量工具类。主要用于将私有线程和该线程存放的副本对象做一个映射，各个线程之间的变量互不干扰，在高并发场景下，可以实现无状态的调用，特别适用于各个线程依赖不通的变量值完成操作的场景。
 
-
 **从数据结构入手**
 
 下图为ThreadLocal的内部结构图
@@ -9,7 +8,6 @@ ThreadLocal是一个本地线程副本变量工具类。主要用于将私有线
 
 
 ![](https://upload-images.jianshu.io/upload_images/2184951-9611b7b31c9b2e20.png)
-
 
 从上面的结构图，我们已经窥见ThreadLocal的核心机制：
 
@@ -284,40 +282,8 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
 
 - ThreadLocalMap中的Entry弱引用（key）到的是 threadLocal 对象，此处的弱引用意图是，当外界不再持有对 threadLocal 对象的强引用的时候，threadLocal 对象可以被GC。此处Entry对 threadLocal 的弱引用不会引起内存泄露。
 
-- Entry除了持有对threadLocal的弱引用之外还持有对value的强引用。
-
-   先说为什么调用了threadLocal.remove() 就解决了内存泄漏的风险。
-   threadLocal.remove() 这个方法最终会有机会执行到：
-   entry.value = null;
-   entry = null;
-   这样就解除了entry对value的强引用关系，当外部也没有对value的强引用的时候，value就可以被GC。
-
-- 如果不调用threadLocal.remove() 这个方法，其实也是要分情况来考虑的。
-我们知道 entry 是被 threadLocalMap 引用的；而 threadLocalMap 是被 thread 引用的。
-
-如果一个thread执行完毕，进入 TERMINATED 状态时，作为一种GC Root，
-terminated 状态的 thread本身就是可以被GC的。
-那么thread所引用的 threadLocalMap 也就是可以被GC的。
-
-- 那么什么情况下 threadLocalMap 不能被回收呢？
-  那就是thread并不会进入 terminated 状态的时候。
-- 什么时候不进入 terminated 呢？就是当 thread 配合线程池使用的情况下，thread在运行完毕之后
-会被再次放回线程池。
-- 那么如果这个线程永远不被用到，此处的threadLocalMap 包括entry 和 entry引用的value 就不能被回收了。
-- 那么如果这个线程被再次启用，那么threadLocalMap也就不会再重新初始化了。
-- 此处应该考虑另外一个问题，那就是如果再次调用 threadLocal.get() 方法，得到的是上一次set的内容，
-也就是脏读了。
-
-首先，无论是ThrealLocalMap 还是普通的 hashMap，都会存在强引用，即：value 外部引用为null，map内部却还存在强引用，导致gc不会回收。这个是所有容器共有的现象。
-
-所以，如果使用不当，value 泄漏这个事情不单单只有 threalLocalMap 有。
-
-假设：value这个变量，我们外部是需要使用的，注意：value 我们不想回收。但是，如果 key 是局部变量，栈帧释放后，key 变成null，现在我们想回收 entry，但是由于 key 是null，也就无法找到对应的 entry，注意：此时 value 我们还是需要的。但 entry 不需要了。
-
-从内存泄漏的角度讲，entry 才是泄漏的原因，而不是 value。因为 value 我们还需要使用，entry 却不需要使用了。
-
-而 threadlocal 的作者做的事情则是将 entry 清除，并不在乎value是否会清除。因为 value 外部是否有强引用他根本不知道，他只能管理 entry。 所以，内存泄漏根本不关 value 的事情，value 只是在某些情况下顺带清除了，jdk作者真正要做的是 清除 entry。
-
+	![](https://images.zsxq.com/FvCsNCGvwWX_7Qk5j4BBLHSs-GVT?e=1906272000&token=kIxbL07-8jAj8w1n4s9zv64FuZZNEATmlU_Vm6zD:eNqxt-GJw9aH3MU51an7kZaNOkA=)
+	
 **如何避免内存泄露**
 
 既然已经发现有内存泄露的隐患，自然有应对的策略，在调用ThreadLocal的get()、set()可能会清除ThreadLocalMap中key为null的Entry对象，这样对应的value就没有GC Roots可达了，下次GC的时候就可以被回收，当然如果调用remove方法，肯定会删除对应的Entry对象。
@@ -337,6 +303,10 @@ try {
 
 线程同步机制通过对象的锁机制保证同一时间只有一个线程去访问变量，该变量时多个线程共享的。ThreadLocal则为每一个线程提供了一个变量副本，从而隔离了多个线程访问数据的冲突，ThreadLocal提供了线程安全的对象封装，在编写多线程代码时，可以把不安全的代码封装进ThreadLocal。概括的说，对于多线程资源共享的问题，线程同步机制采取了时间换空间的方式，访问串行化，对象共享化；而ThreadLocal采取了空间换时间的方式，访问并行化，对象独享化。
 
+## 6、ThreadLocal实战使用
+
+![](https://images.zsxq.com/FpJPgZR25nWEwZrYm8hpuEAqLrXO?e=1906272000&token=kIxbL07-8jAj8w1n4s9zv64FuZZNEATmlU_Vm6zD:BWOuDBEiVEBBFv2VdjAetEn-C7I=)
+
 ## 6、总结
 
 - 每个ThreadLocal只能保存一个变量副本，如果想要上线一个线程能够保存多个副本以上，就需要创建多个ThreadLocal。
@@ -348,4 +318,13 @@ try {
 https://mp.weixin.qq.com/s/IXYk-6PmsgAkBnTlcWGGpQ
 
 https://www.jianshu.com/p/377bb840802f
+
+
+![](https://upload-images.jianshu.io/upload_images/325120-00fcb7f4184230cd.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+
+详情介绍:
+
+[更新主题详情](https://www.jianshu.com/p/e56fcbc75b56)
+
+420天以来，Java架构更新了 888个主题，已经有156+位同学加入。微信扫码关注java架构，获取Java面试题和架构师相关题目和视频。上述相关面试题答案，尽在Java架构中。
 
