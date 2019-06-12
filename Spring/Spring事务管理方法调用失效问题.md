@@ -31,9 +31,9 @@
  
 - 使用AOP 代理后的方法调用执行流程：
 
-  ![](https://www.icheesedu.com/images/qiniu/a7d8d493-e387-34e9-a637-8a4d8d438602.jpg)
+![](https://www.icheesedu.com/images/qiniu/a7d8d493-e387-34e9-a637-8a4d8d438602.jpg)
  
- ![](https://www.icheesedu.com/images/qiniu/Xnip2018-08-22_21-22-03.png)
+![](https://www.icheesedu.com/images/qiniu/Xnip2018-08-22_21-22-03.png)
 
 - 首先调用的是AOP代理对象而不是目标对象，首先执行事务切面，事务切面内部通过TransactionInterceptor环绕增强进行事务的增强，即进入目标方法之前开启事务，退出目标方法时提交/回滚事务。
 
